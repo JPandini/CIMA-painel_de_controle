@@ -1,54 +1,68 @@
-import React, { useEffect, useState } from 'react';
-import './App.css';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useParams } from "react-router-dom";
 
-function App() {
-  const [data, setData] = useState([]);
-  const [newName, setNewName] = useState('');
+function UpdatePage() {
+  const { id } = useParams();
+  
+  const [dataToUpdate, setDataToUpdate] = useState({
+
+    nome: '',
+    idade: '',
+  });
 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8000/clientes/${id}`);
+        setDataToUpdate(response.data);
+      } catch (error) {
+        console.error('Erro ao buscar dados para atualização', error);
+      }
+    };
     fetchData();
-  }, []);
+  }, [id]);
 
-  const fetchData = () => {
-    axios.get('/api/data')
-      .then(response => {
-        setData(response.data);
-      })
-      .catch(error => {
-        console.error('Erro:', error);
-      });
+  const handleUpdate = async () => {
+    try {
+      const response = await axios.put(`http://localhost:8000/clientes/${id}`, dataToUpdate);
+      console.log('Atualização realizada com sucesso!', response.data);
+    } catch (error) {
+      console.error('Erro ao realizar a atualização', error);
+    }
   };
 
-  const handleUpdate = (id) => {
-    axios.put(`/api/data/${id}`, { newName })
-      .then(response => {
-        console.log('Dados atualizados com sucesso:', response.data);
-        fetchData(); // Recarregar os dados após a atualização
-      })
-      .catch(error => {
-        console.error('Erro ao atualizar os dados:', error);
-      });
+  const handleNomeChange = (e) => {
+    setDataToUpdate({ ...dataToUpdate, nome: e.target.value });
+  };
+
+  const handleIdadeChange = (e) => {
+    setDataToUpdate({ ...dataToUpdate, idade: e.target.value });
   };
 
   return (
-    <div className="App">
-      <h1>Dados do Banco de Dados</h1>
-      <ul>
-        {data.map(item => (
-          <li key={item.id}>
-            {item.nome}{' '}
-            <input
-              type="text"
-              value={newName}
-              onChange={e => setNewName(e.target.value)}
-            />
-            <button onClick={() => handleUpdate(item.id)}>Atualizar</button>
-          </li>
-        ))}
-      </ul>
+    <div>
+      <input
+      type='text'
+      placeholder='id'
+      value={}>
+        
+      </input>
+      <input
+        type="text"
+        placeholder="Nome"
+        value={dataToUpdate.nome}
+        onChange={handleNomeChange}
+      />
+      <input
+        type="text"
+        placeholder="Idade"
+        value={dataToUpdate.idade}
+        onChange={handleIdadeChange}
+      />
+      <button onClick={handleUpdate}>Atualizar</button>
     </div>
   );
 }
 
-export default App;
+export default UpdatePage;
