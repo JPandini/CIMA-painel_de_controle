@@ -13,7 +13,7 @@ return(
         <Route path="/listar" element={ <ClientList/> }/>
         <Route path="/cadastro" element={ <Cadastro/> }/>
         <Route path="/lista/:id" element={ <ListaId/> }/>
-        <Route path="/update" element={ <UpdatePage/> }/>
+        <Route path="/update/:id" element={ <UpdatePage/> }/>
 
     </Routes>
 </BrowserRouter>
