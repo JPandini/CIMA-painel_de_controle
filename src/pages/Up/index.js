@@ -1,37 +1,62 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 function UpdatePage() {
+  const [cliente, setCliente] = useState([]);
   const { id } = useParams();
-
   const [nome, setNome] = useState('');
-  const [idade, setIdade] = useState();
+  const [idade, setIdade] = useState(0);
 
-
-  const handleUpdate = async () => {
-    try {
-      const response = await axios.put(`http://localhost:8000/clientes/${id}`, nome, idade);
-      console.log('Atualização realizada com sucesso!', response.data);
-    } catch (error) {
-      console.error('Erro ao realizar a atualização', error);
+  useEffect(() => {
+    async function loadCliente() {
+      try {
+        const response = await axios.get(`http://localhost:8000/clientes/${id}`);
+        setCliente(response.data);
+        console.log("Deu certo!!");
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     }
-  };
+    loadCliente();
+  }, [id]);
 
-
-
+  async function hundleUpdate() {
+    try {
+      const response = await axios.patch(`http://localhost:8000/clientes/${id}`, {
+        nome: nome,
+        idade: idade
+      });
+      setNome(response.data.nome);
+      setIdade(response.data.idade);
+      console.log("Update Realizado");
+    } catch (erro) {
+      console.error("Error: ", erro);
+    }
+  }
 
   return (
     <div>
+      <h1>Detalhes do Cliente</h1>
+      <ul>
+        {cliente.map(cliente => (
+          <li key={cliente.id}>{cliente.nome}</li>
+        ))}
+      </ul>
 
-      <input placeholder='First Name' onChange={(e) => setNome(e.target.value)}/>
-
-
-      <input placeholder='Last Name' onChange={(e) => setIdade(e.target.value)}/>
-
-
-      <button onClick={handleUpdate} type='submit'>Submit</button>
-
+      <input
+        type="text"
+        placeholder="Nome"
+        value={nome} 
+        onChange={e => setNome(e.target.value)} 
+      />
+      <input
+        type="number" 
+        placeholder="Idade"
+        value={idade} 
+        onChange={e => setIdade(e.target.value)} 
+      />
+      <button onClick={hundleUpdate}>Atualizar</button>
     </div>
   );
 }

@@ -10,7 +10,7 @@ function ListaId() {
     async function loadCliente() {
       try {
         const response = await axios.get(`http://localhost:8000/clientes/${id}`);
-        setCliente(response.data); // Update the state with the fetched client data
+        setCliente(response.data); 
         console.log("Deu certo!!");
       } catch (error) {
         console.error("Error fetching data:", error);
