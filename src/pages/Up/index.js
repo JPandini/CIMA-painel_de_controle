@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 
 function UpdatePage() {
   const { id } = useParams();
-  
-  const [dataToUpdate, setDataToUpdate] = useState({
 
+  const [dataToUpdate, setDataToUpdate] = useState({
     nome: '',
     idade: '',
   });
@@ -43,11 +42,11 @@ function UpdatePage() {
   return (
     <div>
       <input
-      type='text'
-      placeholder='id'
-      value={}>
-        
-      </input>
+        type='text'
+        placeholder='id'
+        value={id} // Set the value of the id input field to the id parameter
+        readOnly // Make the input field read-only
+      />
       <input
         type="text"
         placeholder="Nome"
