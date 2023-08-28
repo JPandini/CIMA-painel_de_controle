@@ -4,6 +4,8 @@ import ClientList from "./pages/Listar";
 import Cadastro from "./pages/Cadastro";
 import ListaId from "./pages/ListaId";
 import UpdatePage from "./pages/Up";
+import DeletePage from "./pages/Delete";
+
 
 function RouteApp(){
 return(
@@ -14,6 +16,7 @@ return(
         <Route path="/cadastro" element={ <Cadastro/> }/>
         <Route path="/lista/:id" element={ <ListaId/> }/>
         <Route path="/update/:id" element={ <UpdatePage/> }/>
+        <Route path="/delete/:id" element={ <DeletePage/> }/>
 
     </Routes>
 </BrowserRouter>
