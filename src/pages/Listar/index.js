@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import './style.css'
 
 function ClientList() {
   const [clientes, setClientes] = useState([]);
@@ -20,9 +21,10 @@ function ClientList() {
       <ul>
         {clientes.map(cliente => (
           <article>
-          <li key={cliente.id}>{cliente.nome}</li>
-          <Link to={`/update/${cliente.id}`} >Update</Link>
-          <Link to={`/delete/${cliente.id}`} >Delete</Link>
+          <li key={cliente.id} className='nome' >{cliente.nome} {cliente.idade}</li>
+
+          <Link className='link-update' to={`/update/${cliente.id}`} >Update</Link>
+          <Link className='link-delete' to={`/delete/${cliente.id}`} >Delete</Link>
           </article>
 
         ))}

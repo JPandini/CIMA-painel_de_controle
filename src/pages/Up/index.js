@@ -40,7 +40,7 @@ function UpdatePage() {
       <h1>Detalhes do Cliente</h1>
       <ul>
         {cliente.map(cliente => (
-          <li key={cliente.id}>{cliente.nome}</li>
+          <li key={cliente.id}>{cliente.nome} {cliente.idade}</li>
         ))}
       </ul>
 
