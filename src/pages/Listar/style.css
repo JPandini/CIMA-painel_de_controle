@@ -1,0 +1,33 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.nome{
+    margin-bottom: 20px;
+    margin-top: 30px;
+    font-size: 18px;
+}
+
+.link-update{
+    padding-right: 10px ;
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+    background-color: rgb(46, 43, 43);
+    padding: 9px;
+    margin: 10px;
+    border-radius: 12px ;
+}
+
+
+.link-delete{
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+    background-color: rgb(46, 43, 43);
+    padding: 9px;
+    margin: 10px;
+    border-radius: 12px ;
+}

@@ -6,9 +6,13 @@ import ListaId from "./pages/ListaId";
 import UpdatePage from "./pages/Up";
 import DeletePage from "./pages/Delete";
 
+import Header from "./components/Header";
+
+
 function RouteApp(){
 return(
 <BrowserRouter>
+<Header/>
     <Routes>
 
         <Route path="/listar" element={ <ClientList/> }/>

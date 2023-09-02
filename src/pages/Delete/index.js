@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -7,6 +8,8 @@ function DeletePage() {
   const { id } = useParams();
   const [nome, setNome] = useState('');
   const [idade, setIdade] = useState();
+
+
 
   useEffect(() => {
     async function loadCliente() {
@@ -21,40 +24,32 @@ function DeletePage() {
     loadCliente();
   }, [id]);
 
-  async function hundleUpdate() {
-   
-      const response = await axios.delete(`http://localhost:8000/clientes/${id}`, {
-        nome: nome,
-        idade: idade
-      });
-      setNome(response.data.nome);
-      setIdade(response.data.idade);
-      console.log("delete Realizado");
-   
-  }
+
+  const handleDelete = async () => {
+    try {
+      const response = await axios.delete(`http://localhost:8000/clientes/${id}`);
+      console.log('Item deletado com sucesso!', response.data);
+    } catch (error) {
+      console.error('Erro ao deletar o item:', error);
+    }
+  };
 
   return (
     <div>
-      <h1>Detalhes do Cliente</h1>
+
+    <h1>Detalhes do Cliente</h1>
+
       <ul>
         {cliente.map(cliente => (
           <li key={cliente.id}>{cliente.nome}</li>
         ))}
       </ul>
 
-      <input
-        type="text"
-        placeholder="Nome"
-        value={nome} 
-        onChange={e => setNome(e.target.value)} 
-      />
-      <input
-        type="number" 
-        placeholder="Idade"
-        value={idade} 
-        onChange={e => setIdade(e.target.value)} 
-      />
-      <button onClick={hundleUpdate}>Atualizar</button>
+
+
+      <h1>Deletar Item</h1>
+      <button onClick={handleDelete}>Deletar</button>
+
     </div>
   );
 }
