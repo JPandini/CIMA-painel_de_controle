@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-function UpdatePage() {
+function DeletePage() {
   const [cliente, setCliente] = useState([]);
   const { id } = useParams();
   const [nome, setNome] = useState('');
-  const [idade, setIdade] = useState(0);
+  const [idade, setIdade] = useState();
 
   useEffect(() => {
     async function loadCliente() {
@@ -23,13 +23,13 @@ function UpdatePage() {
 
   async function hundleUpdate() {
    
-      const response = await axios.patch(`http://localhost:8000/clientes/${id}`, {
+      const response = await axios.delete(`http://localhost:8000/clientes/${id}`, {
         nome: nome,
         idade: idade
       });
       setNome(response.data.nome);
       setIdade(response.data.idade);
-      console.log("Update Realizado");
+      console.log("delete Realizado");
    
   }
 
@@ -59,4 +59,4 @@ function UpdatePage() {
   );
 }
 
-export default UpdatePage;
+export default DeletePage;
