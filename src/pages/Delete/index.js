@@ -6,8 +6,6 @@ import axios from "axios";
 function DeletePage() {
   const [cliente, setCliente] = useState([]);
   const { id } = useParams();
-  const [nome, setNome] = useState('');
-  const [idade, setIdade] = useState();
 
 
 
