@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 function UpdatePage() {
-  const [cliente, setCliente] = useState([]);
+  const [cliente, setCliente] = useState({});
   const { id } = useParams();
   const [nome, setNome] = useState('');
   const [idade, setIdade] = useState(0);
@@ -21,8 +21,8 @@ function UpdatePage() {
     loadCliente();
   }, [id]);
 
-  async function hundleUpdate() {
-   
+  async function handleUpdate() {
+    try {
       const response = await axios.patch(`http://localhost:8000/clientes/${id}`, {
         nome: nome,
         idade: idade
@@ -30,16 +30,18 @@ function UpdatePage() {
       setNome(response.data.nome);
       setIdade(response.data.idade);
       console.log("Update Realizado");
-   
+    } catch (error) {
+      console.error("Error updating data:", error);
+    }
   }
 
   return (
     <div>
       <h1>Detalhes do Cliente</h1>
       <ul>
-        {cliente.map(cliente => (
-          <li key={cliente.id}>{cliente.nome} {cliente.idade}</li>
-        ))}
+        <li key={cliente.id}>
+          {cliente.nome} {cliente.idade}
+        </li>
       </ul>
 
       <input
@@ -54,7 +56,7 @@ function UpdatePage() {
         value={idade} 
         onChange={e => setIdade(e.target.value)} 
       />
-      <button onClick={hundleUpdate}>Atualizar</button>
+      <button onClick={handleUpdate}>Atualizar</button>
     </div>
   );
 }

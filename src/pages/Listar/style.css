@@ -1,64 +1,62 @@
-/* style.css */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
 
-/* Estilo para o contêiner principal */
+h1 {
+  color: #333;
+}
+
 div {
-    text-align: center;
-    background-color: #f5f5f5;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-    max-width: 800px;
-    margin: 0 auto;
-  }
+  margin: 0 auto;
+  width: 80%;
+}
+
+input {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+button {
+  padding: 10px;
+  margin-left: 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+
+}
+
+
+.link-update, .link-delete {
+  padding: 10px;
+  margin-left: 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 20px;
   
-  /* Estilo para o título da lista de clientes */
-  h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  /* Estilo para cada item da lista de clientes */
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  /* Estilo para cada item da lista de clientes */
-  article {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #fff;
-    border-radius: 5px;
-    margin: 10px 0;
-    padding: 10px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Estilo para o nome do cliente */
-  .nome {
-    font-size: 18px;
-    font-weight: bold;
-  }
-  
-  /* Estilo para os links de Update e Delete */
-  .link-update,
-  .link-delete {
-    text-decoration: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    margin-left: 10px;
-    color: #fff;
-    font-weight: bold;
-  }
-  
-  /* Estilo para o link de Update */
-  .link-update {
-    background-color: #007bff;
-  }
-  
-  /* Estilo para o link de Delete */
-  .link-delete {
-    background-color: #dc3545;
-  }
-  
+}
+
+.link-update {
+    background-color: #5967b6; /* Green */
+    color: white; 
+    text-decoration: none; 
+}
+
+.link-delete {
+    background-color: #f44336; /* Red */
+    color: white; 
+}

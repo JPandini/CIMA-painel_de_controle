@@ -1,13 +1,10 @@
-
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
 function DeletePage() {
-  const [cliente, setCliente] = useState([]);
+  const [cliente, setCliente] = useState({});
   const { id } = useParams();
-
-
 
   useEffect(() => {
     async function loadCliente() {
@@ -22,7 +19,6 @@ function DeletePage() {
     loadCliente();
   }, [id]);
 
-
   const handleDelete = async () => {
     try {
       const response = await axios.delete(`http://localhost:8000/clientes/${id}`);
@@ -34,20 +30,12 @@ function DeletePage() {
 
   return (
     <div>
-
-    <h1>Detalhes do Cliente</h1>
-
+      <h1>Detalhes do Cliente</h1>
       <ul>
-        {cliente.map(cliente => (
-          <li key={cliente.id}>{cliente.nome}</li>
-        ))}
+        <li>{cliente.nome}</li>
       </ul>
-
-
-
       <h1>Deletar Item</h1>
       <button onClick={handleDelete}>Deletar</button>
-
     </div>
   );
 }
