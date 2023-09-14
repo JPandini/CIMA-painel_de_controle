@@ -29,7 +29,8 @@ function UpdatePage() {
       });
       setNome(response.data.nome);
       setIdade(response.data.idade);
-      console.log("Update Realizado");
+      alert("Update Realizado");
+      
     } catch (error) {
       console.error("Error updating data:", error);
     }

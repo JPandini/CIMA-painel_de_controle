@@ -4,6 +4,7 @@ import axios from 'axios';
 function App() {
   const [responseData, setResponseData] = useState(null);
   const [inputData, setInputData] = useState({ nome: '', idade: '' });
+  const [cliente, setCliente] = useState([])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
