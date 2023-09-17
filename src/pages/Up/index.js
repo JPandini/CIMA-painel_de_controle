@@ -3,36 +3,42 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 function UpdatePage() {
+  // State para armazenar os dados do cliente
   const [cliente, setCliente] = useState({});
-  const { id } = useParams();
-  const [nome, setNome] = useState('');
+  // State para armazenar o nome e idade para atualização
+  const [nome, setNome] = useState("");
   const [idade, setIdade] = useState(0);
+  // Obtém o parâmetro "id" da URL usando o react-router-dom
+  const { id } = useParams();
 
+  // Função para buscar os dados do cliente
   useEffect(() => {
     async function loadCliente() {
       try {
         const response = await axios.get(`http://localhost:8000/clientes/${id}`);
         setCliente(response.data);
-        console.log("Deu certo!!");
+        console.log("Dados do cliente:", response.data);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Erro ao buscar os dados:", error);
       }
     }
     loadCliente();
   }, [id]);
 
+  // Função para atualizar o cliente
   async function handleUpdate() {
     try {
+      // Faz uma requisição PATCH para atualizar os dados do cliente
       const response = await axios.patch(`http://localhost:8000/clientes/${id}`, {
         nome: nome,
-        idade: idade
+        idade: idade,
       });
+      // Atualiza os estados com os novos dados do cliente
       setNome(response.data.nome);
       setIdade(response.data.idade);
-      alert("Update Realizado");
-      
+      alert("Atualização realizada com sucesso");
     } catch (error) {
-      console.error("Error updating data:", error);
+      console.error("Erro ao atualizar os dados:", error);
     }
   }
 
@@ -45,17 +51,18 @@ function UpdatePage() {
         </li>
       </ul>
 
+
       <input
         type="text"
         placeholder="Nome"
-        value={nome} 
-        onChange={e => setNome(e.target.value)} 
+        value={nome}
+        onChange={(e) => setNome(e.target.value)}
       />
       <input
-        type="number" 
+        type="number"
         placeholder="Idade"
-        value={idade} 
-        onChange={e => setIdade(e.target.value)} 
+        value={idade}
+        onChange={(e) => setIdade(e.target.value)}
       />
       <button onClick={handleUpdate}>Atualizar</button>
     </div>

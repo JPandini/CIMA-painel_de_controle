@@ -23,6 +23,7 @@ function ClientList() {
       cliente.nome.toLowerCase().includes(searchNome.toLowerCase())
     );
     setFilteredClientes(filtered);
+    
   }, [searchNome, clientes]);
 
   const handleDelete = async (id) => {

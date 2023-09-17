@@ -2,16 +2,15 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 function App() {
-  const [responseData, setResponseData] = useState(null);
   const [inputData, setInputData] = useState({ nome: '', idade: '' });
-  const [cliente, setCliente] = useState([])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
       const response = await axios.post('http://localhost:8000/clientes/', inputData); // Substitua a URL pela rota correta em seu backend
-      setResponseData(response.data);
+      console.log('Dados enviados com sucesso:', response.data);
+      alert("Cadastro realizado com sucesso!")
     } catch (error) {
       console.error('Erro ao enviar dados:', error);
     }
@@ -36,12 +35,6 @@ function App() {
         </div>
         <button type="submit">Enviar</button>
       </form>
-      {responseData && (
-        <div>
-          <h2>Resposta do Backend:</h2>
-          <pre>{JSON.stringify(responseData, null, 2)}</pre>
-        </div>
-      )}
     </div>
   );
 }
