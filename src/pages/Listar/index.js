@@ -10,7 +10,7 @@ function ClientList() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get('http://localhost:8000/clientes/');
+      const response = await axios.get('http://localhost:8000/cidade/');
       setClientes(response.data);
       setFilteredClientes(response.data);
     }
@@ -29,7 +29,7 @@ function ClientList() {
   const handleDelete = async (id) => {
     if (!isNaN(id)) {
       try {
-        const response = await axios.delete(`http://localhost:8000/clientes/${id}`);
+        const response = await axios.delete(`http://localhost:8000/cidade/${id}`);
         console.log('Item deletado com sucesso!', response.data);
         window.location.reload();
         alert("Usuário deletado com sucesso!")
@@ -58,7 +58,7 @@ function ClientList() {
       <ul>
         {filteredClientes.map(cliente => (
           <article key={cliente.id}>
-            <li className='nome'> {cliente.id} - {cliente.nome} - {cliente.idade}</li>
+            <li className='nome'> {cliente.id} - {cliente.nome}</li>
             <Link className='link-update' to={`/update/${cliente.id}`}>Update</Link>
             <button className='link-delete' onClick={() => handleDelete(cliente.id)}>Deletar</button>
           </article>

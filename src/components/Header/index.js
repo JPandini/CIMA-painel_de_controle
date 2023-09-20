@@ -6,7 +6,7 @@ function Header(){
     <header>
         <Link className='botao' to="/">Menu</Link>
         <Link className='botao' to="/cadastro">Cadastro</Link>
-        <Link className='botao' to="/listar">Clientes</Link>
+        <Link className='botao' to="/listar">Cidade</Link>
     </header>
     )
 }

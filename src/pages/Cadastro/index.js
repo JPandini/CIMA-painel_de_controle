@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 function App() {
-  const [inputData, setInputData] = useState({ nome: '', idade: '' });
+  const [inputData, setInputData] = useState({ nome: '',});
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:8000/clientes/', inputData); // Substitua a URL pela rota correta em seu backend
+      const response = await axios.post('http://localhost:8000/cidade/', inputData); // Substitua a URL pela rota correta em seu backend
       console.log('Dados enviados com sucesso:', response.data);
       alert("Cadastro realizado com sucesso!")
     } catch (error) {
@@ -28,10 +28,6 @@ function App() {
         <div>
           <label>Nome:</label>
           <input type="text" name="nome" value={inputData.nome} onChange={handleInputChange} />
-        </div>
-        <div>
-          <label>Idade:</label>
-          <input type="text" name="idade" value={inputData.idade} onChange={handleInputChange} />
         </div>
         <button type="submit">Enviar</button>
       </form>
