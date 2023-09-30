@@ -5,8 +5,10 @@ import './home.css'
 function Home()  {
 
     return(
+        <div className="tabelas">
+        <h3 className="titulo-tabelas">Tabelas</h3>
         <ul className="lista-banco">
-            <li className="lista-bairro"><Link>bairro</Link></li>
+            <li className="lista-bairro"><Link to={"/bairro"} className="links">bairro</Link></li>
             <li className="lista-cidade">cidade</li>
             <li className="lista-endereco">endereco</li>
             <li className="lista-grupo">grupo</li>
@@ -15,6 +17,7 @@ function Home()  {
             <li className="lista-presidente">presidente</li>
             <li className="lista-usuario">usuario</li>
         </ul>
+        </div>
     );
 }
 
