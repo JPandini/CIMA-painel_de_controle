@@ -44,20 +44,21 @@ function ClientList() {
   
 
   return (
-    <div>
-      <h1>Lista de Clientes</h1>
-      <div>
-        <input
+    <div className="client-list-container">
+      <h1 className="main-heading">Lista de Clientes</h1>
+      <div className="client-list-container">
+        <input 
           type="text"
           placeholder="Pesquisar por nome"
           value={searchNome}
           onChange={(e) => setSearchNome(e.target.value)}
+          className="search-input"
         />
-        <button onClick={() => setSearchNome('')}>Limpar</button>
+        <button onClick={() => setSearchNome('')} className="clear-button">Limpar</button>
       </div>
-      <ul>
+      <ul className="client-list">
         {filteredClientes.map(cliente => (
-          <article key={cliente.id}>
+          <article key={cliente.id} className="client-item">
             <li className='nome'> {cliente.id} - {cliente.nome}</li>
             <Link className='link-update' to={`/update/${cliente.id}`}>Update</Link>
             <button className='link-delete' onClick={() => handleDelete(cliente.id)}>Deletar</button>

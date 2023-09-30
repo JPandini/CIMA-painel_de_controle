@@ -3,23 +3,23 @@ body {
   background-color: #f0f0f0;
 }
 
-h1 {
+.main-heading {
   color: #333;
 }
 
-div {
+.client-list-container{
   margin: 0 auto;
   width: 80%;
 }
 
-input {
+.search-input {
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
   border: none;
 }
 
-button {
+.link-delete {
   padding: 10px;
   margin-left: 10px;
   border-radius: 5px;
@@ -27,11 +27,11 @@ button {
   cursor: pointer;
 }
 
-ul {
+.client-list {
   list-style-type: none;
 }
 
-li {
+.nome {
   background-color: #fff;
   padding: 20px;
   margin-bottom: 10px;
