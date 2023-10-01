@@ -1,17 +1,35 @@
 .lista-banco{
     margin: 0;
     list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 0;
 }
 
 .tabelas{
-    border: 1px;
-    border-color: black;
-    width: 100px;
+    width: 200px;
+    display: flex;
+    border: 3px solid #000000;
+    border-top: none;
+    border-left: none;
+    flex-direction: column;
+    padding-right: 30px;
+    justify-content: center;
+}
+
+.titulo-tabelas{
+    justify-content: center;
+    display: flex;
+    font-size: 25px;
+    margin-bottom: 7px;
 }
 
 .links{
     text-decoration:none ;
     color: black;
+    padding: auto;
+    padding-right: 70px;
 }
 .lista-bairro,
 .lista-cidade,
@@ -25,9 +43,10 @@
   background-color: #fff;
   padding: 10px;
   margin-bottom: 7px;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
   width: 100px;
   margin-top: 7px;
+  margin-left: none;
 }
 

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import './style.css';
 
-function ClientList() {
+function CidadeHome() {
   const [clientes, setClientes] = useState([]);
   const [searchNome, setSearchNome] = useState('');
   const [filteredClientes, setFilteredClientes] = useState([]);
@@ -23,7 +23,7 @@ function ClientList() {
       cliente.nome.toLowerCase().includes(searchNome.toLowerCase())
     );
     setFilteredClientes(filtered);
-
+    
   }, [searchNome, clientes]);
 
   const handleDelete = async (id) => {
@@ -40,8 +40,8 @@ function ClientList() {
       console.error('ID inválido:', id);
     }
   };
-
-
+  
+  
 
   return (
     <div className="client-list-container">
@@ -69,4 +69,4 @@ function ClientList() {
   );
 }
 
-export default ClientList;
+export default CidadeHome;
