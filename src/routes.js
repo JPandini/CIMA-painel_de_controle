@@ -7,6 +7,10 @@ import BairroHome from "./pages/tabelas/bairro/index";
 import EnderecoHome from "./pages/tabelas/endereco/index";
 import GrupoHome from "./pages/tabelas/grupo/index";
 import MensagemHome from "./pages/tabelas/mensagem/index";
+import PostagemHome from "./pages/tabelas/postagem";
+import PresidenteHome from "./pages/tabelas/presidente";
+import UsuarioHome from "./pages/tabelas/usuario";
+
 
 import ClientList from "./pages/Listar";
 import Cadastro from "./pages/Cadastro";
@@ -29,6 +33,9 @@ return(
         <Route path="/endereco" element={ <EnderecoHome/> }/>
         <Route path="/grupo" element={ <GrupoHome/> }/>
         <Route path="/mensagem" element={ <MensagemHome/> }/>
+        <Route path="/postagem" element={ <PostagemHome/> }/>
+        <Route path="/presidente" element={ <PresidenteHome/> }/>
+        <Route path="/usuario" element={ <UsuarioHome/> }/>
 
 
 
