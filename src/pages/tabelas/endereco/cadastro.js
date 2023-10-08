@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 function CadastroEndereco() {
-  const [inputData, setInputData] = useState({ nome: '',});
+  const [inputData, setInputData] = useState({ numero: '',});
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:8000/cidade/', inputData); // Substitua a URL pela rota correta em seu backend
+      const response = await axios.post('http://localhost:8000/endereco/', inputData); // Substitua a URL pela rota correta em seu backend
       console.log('Dados enviados com sucesso:', response.data);
       alert("Cadastro realizado com sucesso!")
     } catch (error) {

@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 function CadastroGrupo() {
-  const [inputData, setInputData] = useState({ nome: '',});
+  const [inputData, setInputData] = useState({ nome: '', codbairro: ''});
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:8000/cidade/', inputData); // Substitua a URL pela rota correta em seu backend
+      const response = await axios.post('http://localhost:8000/grupo/', inputData);
       console.log('Dados enviados com sucesso:', response.data);
       alert("Cadastro realizado com sucesso!")
     } catch (error) {
@@ -17,8 +17,8 @@ function CadastroGrupo() {
   };
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setInputData((prevData) => ({ ...prevData, [name]: value }));
+    const { name, codbairro, value } = e.target;
+    setInputData((prevData) => ({ ...prevData, [name]: value, [codbairro]:value}));
   };
 
   return (
@@ -28,6 +28,7 @@ function CadastroGrupo() {
         <div>
           <label>Nome:</label>
           <input type="text" name="nome" value={inputData.nome} onChange={handleInputChange} />
+          <input type="text" name="codbairro" value={inputData.codbairro} onChange={handleInputChange} />
         </div>
         <button type="submit">Enviar</button>
       </form>

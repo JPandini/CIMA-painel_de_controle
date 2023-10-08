@@ -47,7 +47,7 @@ function EnderecoHome() {
   return (
     <div className="client-list-container">
       <h1 className="main-heading">Lista de Clientes</h1>
-      <div className="client-list-container">
+      <div className="client-list-container_head">
         <input 
           type="text"
           placeholder="Pesquisar por nome"
@@ -57,6 +57,7 @@ function EnderecoHome() {
         />
         <button onClick={() => setSearchNome('')} className="clear-button">Limpar</button>
       </div>
+      <Link className='link-cadastro' to={"/cadastroendereco"}>Cadastrar</Link>
       <ul className="client-list">
         {filteredClientes.map(cliente => (
           <article key={cliente.id} className="client-item">

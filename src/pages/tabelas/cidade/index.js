@@ -45,7 +45,7 @@ function CidadeHome() {
 
   return (
     <div className="client-list-container">
-      <h1 className="main-heading">Lista de Clientes</h1>
+      <h1 className="main-heading">Lista de Cidades</h1>
       <div className="client-list-container_head">
         <input 
           type="text"
