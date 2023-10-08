@@ -12,6 +12,16 @@ import PresidenteHome from "./pages/tabelas/presidente";
 import UsuarioHome from "./pages/tabelas/usuario";
 
 
+import CadastroCidade from "./pages/tabelas/cidade/cadastro";
+import CadastroBairro from "./pages/tabelas/bairro/cadastro";
+import CadastroEndereco from "./pages/tabelas/endereco/cadastro";
+import CadastroGrupo from "./pages/tabelas/grupo/cadastro";
+import CadastroMensagem from "./pages/tabelas/mensagem/cadastro";
+import CadastroPostagem from "./pages/tabelas/postagem/cadastro";
+import CadastroPresidente from "./pages/tabelas/presidente/cadastro";
+import CadastroUsuario from "./pages/tabelas/usuario/cadastro";
+
+
 import ClientList from "./pages/Listar";
 import Cadastro from "./pages/Cadastro";
 import ListaId from "./pages/ListaId";
@@ -37,6 +47,14 @@ return(
         <Route path="/presidente" element={ <PresidenteHome/> }/>
         <Route path="/usuario" element={ <UsuarioHome/> }/>
 
+        <Route path="/cadastrocidade" element={ <CadastroCidade/> }/>
+        <Route path="/cadastrobairro" element={ <CadastroBairro/> }/>
+        <Route path="/cadastroendereco" element={ <CadastroEndereco/> }/>
+        <Route path="/cadastrogrupo" element={ <CadastroGrupo/> }/>
+        <Route path="/cadastromensagem" element={ <CadastroMensagem/> }/>
+        <Route path="/cadastropostagem" element={ <CadastroPostagem/> }/>
+        <Route path="/cadastropresidente" element={ <CadastroPresidente/> }/>
+        <Route path="/cadastrousuario" element={ <CadastroUsuario/> }/>
 
 
 
