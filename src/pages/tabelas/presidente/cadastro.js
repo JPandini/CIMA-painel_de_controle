@@ -32,6 +32,7 @@ function CadastroPresidente() {
           <input type="text" name="senha" value={inputData.senha} onChange={handleInputChange} />
           <input type="text" name="email" value={inputData.email} onChange={handleInputChange} />
           <input type="text" name="codbairro" value={inputData.codbairro} onChange={handleInputChange} />
+
           
         </div>
         <button type="submit">Enviar</button>
