@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import '../style/style-cadastro.css';
 
 function CadastroCidade() {
   const [inputData, setInputData] = useState({ nome: '',});
@@ -8,7 +9,7 @@ function CadastroCidade() {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:8000/cidade/', inputData); // Substitua a URL pela rota correta em seu backend
+      const response = await axios.post('http://localhost:8000/cidade/', inputData); 
       console.log('Dados enviados com sucesso:', response.data);
       alert("Cadastro realizado com sucesso!")
     } catch (error) {
@@ -22,14 +23,13 @@ function CadastroCidade() {
   };
 
   return (
-    <div className="App">
-      <h1>Enviar Dados para o Backend</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Nome:</label>
-          <input type="text" name="nome" value={inputData.nome} onChange={handleInputChange} />
+    <div className="app">
+      <h1 className='titulo'>Enviar Dados para o Banco</h1>
+      <form className='form1' onSubmit={handleSubmit}>
+        <div className='div-formulario'>
+          <input className='nome-cidade' placeholder="Cidade" type="text" name="nome" value={inputData.nome} onChange={handleInputChange} />
         </div>
-        <button type="submit">Enviar</button>
+        <button className='botao-enviar' type="submit">Enviar</button>
       </form>
     </div>
   );

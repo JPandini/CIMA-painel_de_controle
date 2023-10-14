@@ -13,6 +13,8 @@ function CidadeHome() {
       const response = await axios.get('http://localhost:8000/cidade/');
       setClientes(response.data);
       setFilteredClientes(response.data);
+      
+
     }
 
     fetchData();
