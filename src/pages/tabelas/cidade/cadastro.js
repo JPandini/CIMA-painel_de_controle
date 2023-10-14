@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import '../style/style-cadastro.css';
 
 function CadastroCidade() {
@@ -24,7 +25,8 @@ function CadastroCidade() {
 
   return (
     <div className="app">
-      <h1 className='titulo'>Enviar Dados para o Banco</h1>
+      <Link className='link-voltar' to={'/cidade'}>Voltar</Link>
+      <h1 className='titulo'>Cadastro de cidade</h1>
       <form className='form1' onSubmit={handleSubmit}>
         <div className='div-formulario'>
           <input className='nome-cidade' placeholder="Cidade" type="text" name="nome" value={inputData.nome} onChange={handleInputChange} />
