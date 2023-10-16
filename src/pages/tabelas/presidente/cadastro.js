@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import '../style/style-cadastro.css';
 
 function CadastroPresidente() {
   const [inputData, setInputData] = useState({ nome: '', usuario: '', senha:'', email: '', codbairro: ''});
@@ -24,21 +22,20 @@ function CadastroPresidente() {
   };
 
   return (
-    <div className="app">
-    <Link className='link-voltar' to={'/presidente'}>Voltar</Link>
-    <h1 className='titulo'>Cadastro de presidente do bairro</h1>
-    <form className='form1' onSubmit={handleSubmit}>
-      <div className='div-formulario'>
-
-          <input type="text" className='nome-cidade' placeholder="Nome Completo" name="nome" value={inputData.nome} onChange={handleInputChange} />
-          <input type="text" className='nome-cidade' placeholder="Usuário" name="usuario" value={inputData.usuario} onChange={handleInputChange} />
-          <input type="text" className='nome-cidade' placeholder="Senha" name="senha" value={inputData.senha} onChange={handleInputChange} />
-          <input type="text" className='nome-cidade' placeholder="Email" name="email" value={inputData.email} onChange={handleInputChange} />
-          <input type="text" className='nome-cidade' placeholder="id_bairro" name="codbairro" value={inputData.codbairro} onChange={handleInputChange} />
+    <div className="App">
+      <h1>Enviar Dados para o Backend</h1>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Nome:</label>
+          <input type="text" name="nome" value={inputData.nome} onChange={handleInputChange} />
+          <input type="text" name="usuario" value={inputData.usuario} onChange={handleInputChange} />
+          <input type="text" name="senha" value={inputData.senha} onChange={handleInputChange} />
+          <input type="text" name="email" value={inputData.email} onChange={handleInputChange} />
+          <input type="text" name="codbairro" value={inputData.codbairro} onChange={handleInputChange} />
 
           
         </div>
-        <button className='botao-enviar' type="submit">Enviar</button>
+        <button type="submit">Enviar</button>
       </form>
     </div>
   );
