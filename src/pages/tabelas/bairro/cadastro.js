@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import '../style/style-cadastro.css';
+
 
 function CadastroBairro() {
   const [inputData, setInputData] = useState({ nome: '', codcidade: '',});
@@ -22,15 +25,15 @@ function CadastroBairro() {
   };
 
   return (
-    <div className="App">
-      <h1>Enviar Dados para o Backend</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Nome:</label>
-          <input type="text" name="nome" value={inputData.nome} onChange={handleInputChange} />
-          <input type="text" name="codcidade" value={inputData.codcidade} onChange={handleInputChange} />
+    <div className="app">
+    <Link className='link-voltar' to={'/bairro'}>Voltar</Link>
+      <h1 className='titulo'>Cadastro de bairro</h1>
+      <form className='form1' onSubmit={handleSubmit}>
+        <div className='div-formulario'>
+          <input className='nome-cidade' placeholder="Bairro" type="text" name="nome" value={inputData.nome} onChange={handleInputChange} />
+          <input className='nome-cidade' placeholder="id_cidade" type="text" name="codcidade" value={inputData.codcidade} onChange={handleInputChange} />
         </div>
-        <button type="submit">Enviar</button>
+        <button className='botao-enviar' type="submit">Enviar</button>
       </form>
     </div>
   );

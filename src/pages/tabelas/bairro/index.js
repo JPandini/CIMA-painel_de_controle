@@ -45,7 +45,7 @@ function BairroHome() {
 
   return (
     <div className="client-list-container">
-      <h1 className="main-heading">Lista de Clientes</h1>
+      <h1 className="main-heading">Lista de Bairro</h1>
       <div className="client-list-container_head">
         <input 
           type="text"

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import '../style/style-cadastro.css'; 
 
 function CadastroEndereco() {
   const [inputData, setInputData] = useState({ numero: '', complemento: '', rua: '', codbairro: '' });
@@ -23,25 +25,16 @@ function CadastroEndereco() {
 
   return (
     <div className="App">
-      <h1>Enviar Dados para o Backend</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Número:</label>
-          <input type="text" name="numero" value={inputData.numero} onChange={handleInputChange} />
+    <Link className='link-voltar' to={'/endereco'}>Voltar</Link>
+      <h1 className='titulo'>Cadastro de endereço</h1>
+      <form className='form1' onSubmit={handleSubmit}>
+        <div className='div-formulario'>
+          <input className='nome-cidade' placeholder="Número" type="text" name="numero" value={inputData.numero} onChange={handleInputChange} />
+          <input className='nome-cidade' placeholder="Complemento" type="text" name="complemento" value={inputData.complemento} onChange={handleInputChange} />
+          <input className='nome-cidade' placeholder="Rua" type="text" name="rua" value={inputData.rua} onChange={handleInputChange} />
+          <input className='nome-cidade' placeholder="id_bairro" type="text" name="codbairro" value={inputData.codbairro} onChange={handleInputChange} />
         </div>
-        <div>
-          <label>Complemento:</label>
-          <input type="text" name="complemento" value={inputData.complemento} onChange={handleInputChange} />
-        </div>
-        <div>
-          <label>Rua:</label>
-          <input type="text" name="rua" value={inputData.rua} onChange={handleInputChange} />
-        </div>
-        <div>
-          <label>Código do Bairro:</label>
-          <input type="text" name="codbairro" value={inputData.codbairro} onChange={handleInputChange} />
-        </div>
-        <button type="submit">Enviar</button>
+        <button className='botao-enviar' type="submit">Enviar</button>
       </form>
     </div>
   );
