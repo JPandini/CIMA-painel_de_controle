@@ -5,10 +5,15 @@ import '../style/style-cadastro.css';
 
 function CadastroCidade() {
   const [inputData, setInputData] = useState({ nome: '',});
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (inputData.nome.trim() === '') {
+      
+      setError('O campo Cidade não pode estar vazio.');
+    } else {
     try {
       const response = await axios.post('http://localhost:8000/cidade/', inputData); 
       console.log('Dados enviados com sucesso:', response.data);
@@ -16,7 +21,8 @@ function CadastroCidade() {
     } catch (error) {
       console.error('Erro ao enviar dados:', error);
     }
-  };
+  }
+};
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -31,6 +37,7 @@ function CadastroCidade() {
         <div className='div-formulario'>
           <input className='nome-cidade' placeholder="Cidade" type="text" name="nome" value={inputData.nome} onChange={handleInputChange} />
         </div>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
         <button className='botao-enviar' type="submit">Enviar</button>
       </form>
     </div>
