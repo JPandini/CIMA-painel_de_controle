@@ -22,6 +22,9 @@ import CadastroPresidente from "./pages/tabelas/presidente/cadastro";
 import CadastroUsuario from "./pages/tabelas/usuario/cadastro";
 
 
+import UpdateCidade from "./pages/tabelas/cidade/update";
+
+
 import ClientList from "./pages/Listar";
 import Cadastro from "./pages/Cadastro";
 import ListaId from "./pages/ListaId";
@@ -55,6 +58,8 @@ return(
         <Route path="/cadastropostagem" element={ <CadastroPostagem/> }/>
         <Route path="/cadastropresidente" element={ <CadastroPresidente/> }/>
         <Route path="/cadastrousuario" element={ <CadastroUsuario/> }/>
+
+        <Route path="/updatecidade" element={ <UpdateCidade/> }/>
 
 
 
