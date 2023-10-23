@@ -6,9 +6,21 @@ import '../style/style-cadastro.css';
 
 function CadastroBairro() {
   const [inputData, setInputData] = useState({ nome: '', codcidade: '',});
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (inputData.nome.trim() === '') {
+      setError('O campo nome não pode estar vazio.');
+      return;
+    }
+
+    
+    if (inputData.codcidade.trim() === '') {
+      setError('O campo id_Cidade não pode estar vazio.');
+      return;
+    }
 
     try {
       const response = await axios.post('http://localhost:8000/bairro/', inputData); // Substitua a URL pela rota correta em seu backend
@@ -33,6 +45,7 @@ function CadastroBairro() {
           <input className='nome-cidade' placeholder="Bairro" type="text" name="nome" value={inputData.nome} onChange={handleInputChange} />
           <input className='nome-cidade' placeholder="id_cidade" type="text" name="codcidade" value={inputData.codcidade} onChange={handleInputChange} />
         </div>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
         <button className='botao-enviar' type="submit">Enviar</button>
       </form>
     </div>

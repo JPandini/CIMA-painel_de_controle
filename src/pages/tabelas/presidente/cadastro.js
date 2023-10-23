@@ -5,9 +5,32 @@ import '../style/style-cadastro.css';
 
 function CadastroPresidente() {
   const [inputData, setInputData] = useState({ nome: '', usuario: '', senha:'', email: '', codbairro: ''});
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (inputData.nome.trim() === '') {
+      setError('O campo nome não pode estar vazio.');
+      return;
+    }
+    if (inputData.usuario.trim() === '') {
+      setError('O campo usuario não pode estar vazio.');
+      return;
+    }
+
+    if (inputData.senha.trim() === '') {
+      setError('O campo senha não pode estar vazio.');
+      return;
+    }
+    if (inputData.email.trim() === '') {
+      setError('O campo email não pode estar vazio.');
+      return;
+    }
+    if (inputData.codbairro.trim() === '') {
+      setError('O campo id_Bairro não pode estar vazio.');
+      return;
+    }
 
     try {
       const response = await axios.post('http://localhost:8000/presidente/', inputData); // Substitua a URL pela rota correta em seu backend
@@ -38,6 +61,7 @@ function CadastroPresidente() {
 
           
         </div>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
         <button className='botao-enviar' type="submit">Enviar</button>
       </form>
     </div>

@@ -3,9 +3,42 @@ import axios from 'axios';
 
 function CadastroUsuario() {
   const [inputData, setInputData] = useState({ nome: '', usuario:'', senha:'', endereco: '', email:'',cpf:'', codendereco:''});
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (inputData.nome.trim() === '') {
+      setError('O campo nome não pode estar vazio.');
+      return;
+    }
+
+    if (inputData.usuario.trim() === '') {
+      setError('O campo usuario não pode estar vazio.');
+      return;
+    }
+    if (inputData.senha.trim() === '') {
+      setError('O campo senha não pode estar vazio.');
+      return;
+    }
+    if (inputData.endereco.trim() === '') {
+      setError('O campo endereco não pode estar vazio.');
+      return;
+    }
+
+    if (inputData.email.trim() === '') {
+      setError('O campo email não pode estar vazio.');
+      return;
+    }
+
+    if (inputData.cpf.trim() === '') {
+      setError('O campo cpf não pode estar vazio.');
+      return;
+    }
+    if (inputData.codendereco.trim() === '') {
+      setError('O campo id_endereco não pode estar vazio.');
+      return;
+    }
 
     try {
       const response = await axios.post('http://localhost:8000/usuario/', inputData); // Substitua a URL pela rota correta em seu backend
@@ -35,6 +68,7 @@ function CadastroUsuario() {
           <input type="text" name="cpf" value={inputData.cpf} onChange={handleInputChange} />
           <input type="text" name="codendereco" value={inputData.codendereco} onChange={handleInputChange} />
         </div>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
         <button type="submit">Enviar</button>
       </form>
     </div>
