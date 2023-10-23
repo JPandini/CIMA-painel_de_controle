@@ -10,13 +10,29 @@ function BairroHome() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get('http://localhost:8000/bairro/');
-      setClientes(response.data);
-      setFilteredClientes(response.data);
+      try {
+        const response = await axios.get('http://localhost:8000/bairro/');
+        const bairros = response.data;
+  
+        // Para cada bairro, faça uma chamada separada para buscar informações da cidade
+        const bairrosComCidades = await Promise.all(bairros.map(async (bairro) => {
+          const cidadeResponse = await axios.get(`http://localhost:8000/cidade/${bairro.id}`);
+          const cidade = cidadeResponse.data;
+          return { ...bairro, cidade };
+        }));
+  
+        setClientes(bairrosComCidades);
+        setFilteredClientes(bairrosComCidades);
+      } catch (error) {
+        console.error('Erro na solicitação:', error);
+        // Trate o erro de acordo com a necessidade (exibir mensagem de erro, etc.).
+      }
     }
-
+  
     fetchData();
   }, []);
+  
+  
 
   useEffect(() => {
     const filtered = clientes.filter(cliente =>
@@ -40,8 +56,6 @@ function BairroHome() {
       console.error('ID inválido:', id);
     }
   };
-  
-  
 
   return (
     <div className="client-list-container">
@@ -60,7 +74,9 @@ function BairroHome() {
       <ul className="client-list">
         {filteredClientes.map(cliente => (
           <article key={cliente.id} className="client-item">
-            <li className='nome'> {cliente.id} - {cliente.nome}</li>
+            <li className='nome'>
+              {cliente.id} - {cliente.nome} - {cliente.cidade.nome}
+            </li>
             <Link className='link-update' to={`/update/${cliente.id}`}>Update</Link>
             <button className='link-delete' onClick={() => handleDelete(cliente.id)}>Deletar</button>
           </article>

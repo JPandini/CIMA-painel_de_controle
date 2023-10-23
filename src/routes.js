@@ -59,7 +59,7 @@ return(
         <Route path="/cadastropresidente" element={ <CadastroPresidente/> }/>
         <Route path="/cadastrousuario" element={ <CadastroUsuario/> }/>
 
-        <Route path="/updatecidade" element={ <UpdateCidade/> }/>
+        <Route path="/updatecidade/:id" element={ <UpdateCidade/> }/>
 
 
 

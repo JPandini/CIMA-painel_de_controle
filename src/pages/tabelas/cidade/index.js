@@ -14,7 +14,6 @@ function CidadeHome() {
       setClientes(response.data);
       setFilteredClientes(response.data);
       
-
     }
 
     fetchData();
@@ -49,7 +48,7 @@ function CidadeHome() {
     <div className="client-list-container">
       <h1 className="main-heading">Lista de Cidades</h1>
       <div className="client-list-container_head">
-        <input 
+        <input
           type="text"
           placeholder="Pesquisar por nome"
           value={searchNome}
@@ -62,7 +61,7 @@ function CidadeHome() {
       <ul className="client-list">
         {filteredClientes.map(cliente => (
           <article key={cliente.id} className="client-item">
-            <li className='nome'> {cliente.id} - {cliente.nome}</li>
+            <li className='nome'> {cliente.id} - {cliente.nome} </li>
             <Link className='link-update' to={`/updatecidade/${cliente.id}`}>Update</Link>
             <button className='link-delete' onClick={() => handleDelete(cliente.id)}>Deletar</button>
           </article>

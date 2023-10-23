@@ -3,34 +3,31 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 function UpdateCidade() {
-
-  const [cliente, setCliente] = useState({});
-  const [nome, setNome] = useState("");
+  const [cidade, setCidade] = useState({ nome: "" });
+  const [novoNome, setNovoNome] = useState("");
   const { id } = useParams();
 
-  // Função para buscar os dados do cliente
+  // Função para buscar os dados da cidade
   useEffect(() => {
-    async function loadCliente() {
+    async function loadCidade() {
       try {
         const response = await axios.get(`http://localhost:8000/cidade/${id}`);
-        setCliente(response.data);
-        console.log("Dados do cliente:", response.data);
+        setCidade(response.data);
+        console.log("Dados da cidade:", response.data);
       } catch (error) {
         console.error("Erro ao buscar os dados:", error);
       }
     }
-    loadCliente();
+    loadCidade();
   }, [id]);
 
-  // Função para atualizar o cliente
+  // Função para atualizar o nome da cidade
   async function handleUpdate() {
     try {
-      // Faz uma requisição PATCH para atualizar os dados do cliente
-      const response = await axios.patch(`http://localhost:8000/clientes/${id}`, {
-        nome: nome,
+      const response = await axios.patch(`http://localhost:8000/cidade/${id}`, {
+        nome: novoNome,
       });
-      // Atualiza os estados com os novos dados do cliente
-      setNome(response.data.nome);
+      setCidade({ ...cidade, nome: response.data.nome });
       alert("Atualização realizada com sucesso");
     } catch (error) {
       console.error("Erro ao atualizar os dados:", error);
@@ -39,21 +36,20 @@ function UpdateCidade() {
 
   return (
     <div>
-      <h1>Detalhes do Cliente</h1>
+      <h1>Detalhes da Cidade</h1>
       <ul>
-        <li key={cliente.id}>
-          {cliente.nome}
+        <li>
+          {cidade.nome}
         </li>
       </ul>
 
-
       <input
         type="text"
-        placeholder="Nome"
-        value={nome}
-        onChange={(e) => setNome(e.target.value)}
+        placeholder="Novo Nome"
+        value={novoNome}
+        onChange={(e) => setNovoNome(e.target.value)}
       />
-      
+
       <button onClick={handleUpdate}>Atualizar</button>
     </div>
   );
