@@ -4,42 +4,34 @@ import { Link } from 'react-router-dom';
 import '../style/style-tabelas.css';
 
 function BairroHome() {
+  const [cidades, setCidades] = useState([]);
   const [clientes, setClientes] = useState([]);
   const [searchNome, setSearchNome] = useState('');
   const [filteredClientes, setFilteredClientes] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
-      try {
-        const response = await axios.get('http://localhost:8000/bairro/');
-        const bairros = response.data;
-  
-        // Para cada bairro, faça uma chamada separada para buscar informações da cidade
-        const bairrosComCidades = await Promise.all(bairros.map(async (bairro) => {
-          const cidadeResponse = await axios.get(`http://localhost:8000/cidade/${bairro.id}`);
-          const cidade = cidadeResponse.data;
-          return { ...bairro, cidade };
-        }));
-  
-        setClientes(bairrosComCidades);
-        setFilteredClientes(bairrosComCidades);
-      } catch (error) {
-        console.error('Erro na solicitação:', error);
-        // Trate o erro de acordo com a necessidade (exibir mensagem de erro, etc.).
-      }
+      const response = await axios.get('http://localhost:8000/bairro/');
+      setClientes(response.data);
+      setFilteredClientes(response.data);
     }
-  
+
+    axios.get('http://localhost:8000/cidade')
+      .then((response) => {
+        setCidades(response.data);
+      })
+      .catch((error) => {
+        console.error('Erro ao buscar cidades:', error);
+      });
+
     fetchData();
   }, []);
-  
-  
 
   useEffect(() => {
-    const filtered = clientes.filter(cliente =>
+    const filtered = clientes.filter((cliente) =>
       cliente.nome.toLowerCase().includes(searchNome.toLowerCase())
     );
     setFilteredClientes(filtered);
-    
   }, [searchNome, clientes]);
 
   const handleDelete = async (id) => {
@@ -48,7 +40,7 @@ function BairroHome() {
         const response = await axios.delete(`http://localhost:8000/bairro/${id}`);
         console.log('Item deletado com sucesso!', response.data);
         window.location.reload();
-        alert("Usuário deletado com sucesso!")
+        alert('Usuário deletado com sucesso!');
       } catch (error) {
         console.error('Erro ao deletar o item:', error);
       }
@@ -61,21 +53,29 @@ function BairroHome() {
     <div className="client-list-container">
       <h1 className="main-heading">Lista de Bairro</h1>
       <div className="client-list-container_head">
-        <input 
+        <input
           type="text"
           placeholder="Pesquisar por nome"
           value={searchNome}
           onChange={(e) => setSearchNome(e.target.value)}
           className="search-input"
         />
-        <button onClick={() => setSearchNome('')} className="clear-button">Limpar</button>
+        <button onClick={() => setSearchNome('')} className="clear-button">
+          Limpar
+        </button>
       </div>
-      <Link className='link-cadastro' to={"/cadastrobairro"}>Cadastrar</Link>
+      <Link className='link-cadastro' to="/cadastrobairro">Cadastrar</Link>
       <ul className="client-list">
-        {filteredClientes.map(cliente => (
+        {filteredClientes.map((cliente) => (
           <article key={cliente.id} className="client-item">
             <li className='nome'>
-              {cliente.id} - {cliente.nome} - {cliente.cidade.nome}
+              {cliente.id} - {cliente.nome} -{' '}
+              {cidades.map((cidade) => {
+                if (cidade.id === cliente.codcidade) {
+                  return <p className='paragrafo' key={cliente.codcidade}>{cidade.nome}</p>;
+                }
+                return null;
+              })}
             </li>
             <Link className='link-update' to={`/update/${cliente.id}`}>Update</Link>
             <button className='link-delete' onClick={() => handleDelete(cliente.id)}>Deletar</button>

@@ -9,13 +9,12 @@ body {
 
 .client-list-container {
   margin: 0 auto;
-  width: 80%;
 }
 
 .client-list-container_head{
   display: inline-block;
   width: 280px;
-  margin-right: 650px;
+  margin-right: 630px;
 }
 
 .search-input {
@@ -44,11 +43,12 @@ body {
   border-radius: 5px;
   border: none;
   cursor: pointer;
+  margin: 0;
 }
 
 .link-cadastro {
   padding: 10px;
-  margin-left: 10px;
+  
   border-radius: 5px;
   border: none;
   cursor: pointer;
@@ -70,7 +70,7 @@ body {
   margin-bottom: 10px;
   border-radius: 5px;
   display: inline-block;
-  width: 830px;
+  width: 78%;
 }
 
 .link-update,
@@ -82,14 +82,22 @@ body {
   cursor: pointer;
   margin-bottom: 20px;
   font-size: 15px;
+  margin: 0;
 }
 
 .link-update {
   background-color: #5967b6; 
   color: white;
   text-decoration: none;
+  margin: 0;
 }
 
 .link-delete {
   background-color: #f44336; 
+}
+
+.paragrafo{
+  display: inline-block;
+  padding: 0;
+  margin: 0;
 }

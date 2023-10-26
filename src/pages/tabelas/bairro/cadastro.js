@@ -9,15 +9,14 @@ function CadastroBairro() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    // Buscar cidades do seu backend e definir no estado cidades
-    axios.get('http://localhost:8000/cidade') // Substitua a URL pela rota correta em seu backend
+    axios.get('http://localhost:8000/cidade') 
       .then((response) => {
-        setCidades(response.data); // Define as cidades no estado
+        setCidades(response.data); 
       })
       .catch((error) => {
         console.error('Erro ao buscar cidades:', error);
       });
-  }, []); // O segundo argumento vazio garante que a chamada ocorrerá apenas uma vez
+  }, []); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
