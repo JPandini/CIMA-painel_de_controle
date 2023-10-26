@@ -53,14 +53,14 @@ function CadastroBairro() {
         <div className='div-formulario'>
           <input className='nome-cidade' placeholder="Bairro" type="text" name="nome" value={inputData.nome} onChange={handleInputChange} />
           <select
-            className='nome-cidade'
+            className='select'
             name="codcidade"
             value={inputData.codcidade}
             onChange={handleInputChange}
           >
             <option value="">Selecione a cidade</option>
             {cidades.map((cidade) => (
-              <option key={cidade.id} value={cidade.id}>
+              <option  key={cidade.id} value={cidade.id}>
                 {cidade.nome}
               </option>
             ))}

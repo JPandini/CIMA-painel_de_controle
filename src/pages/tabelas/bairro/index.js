@@ -71,7 +71,7 @@ function BairroHome() {
             <li className='nome'>
               {cliente.id} - {cliente.nome} -{' '}
               {cidades.map((cidade) => {
-                if (cidade.id === cliente.codcidade) {
+                while (cidade.id === cliente.codcidade) {
                   return <p className='paragrafo' key={cliente.codcidade}>{cidade.nome}</p>;
                 }
                 return null;
