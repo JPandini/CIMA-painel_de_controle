@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect  } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import '../style/style-cadastro.css';
@@ -6,6 +6,28 @@ import '../style/style-cadastro.css';
 function CadastroPresidente() {
   const [inputData, setInputData] = useState({ nome: '', usuario: '', senha:'', email: '', codbairro: ''});
   const [error, setError] = useState('');
+  const [bairros, setBairros] = useState([]);
+  const [cidades, setCidades] = useState([]);
+
+
+  useEffect(() => {
+    axios.get('http://localhost:8000/bairro') 
+      .then((response) => {
+        setBairros(response.data); 
+      })
+      .catch((error) => {
+        console.error('Erro ao buscar cidades:', error);
+      });
+  }, []); 
+  axios.get('http://localhost:8000/cidade')
+      .then((response) => {
+        setCidades(response.data);
+      })
+      .catch((error) => {
+        console.error('Erro ao buscar cidades:', error);
+      });
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -55,10 +77,28 @@ function CadastroPresidente() {
 
           <input type="text" className='nome-cidade' placeholder="Nome Completo" name="nome" value={inputData.nome} onChange={handleInputChange} />
           <input type="text" className='nome-cidade' placeholder="Usuário" name="usuario" value={inputData.usuario} onChange={handleInputChange} />
-          <input type="text" className='nome-cidade' placeholder="Senha" name="senha" value={inputData.senha} onChange={handleInputChange} />
+          <input type="password" className='nome-cidade' placeholder="Senha" name="senha" value={inputData.senha} onChange={handleInputChange} />
           <input type="text" className='nome-cidade' placeholder="Email" name="email" value={inputData.email} onChange={handleInputChange} />
-          <input type="text" className='nome-cidade' placeholder="id_bairro" name="codbairro" value={inputData.codbairro} onChange={handleInputChange} />
-
+          
+          <select
+            className='select'
+            name="codbairro"
+            value={inputData.codbairro}
+            onChange={handleInputChange}
+          >
+            <option value="">Selecione o bairro</option>
+            {bairros.map((bairro) => (
+              <option  key={bairro.id} value={bairro.id}>
+                {bairro.nome} - 
+                {cidades.map((cidade) => {while (cidade.id === bairro.codcidade) {
+                  return <p className='paragrafo' key={bairro.codcidade}> {cidade.nome}</p>;
+                }
+                return null;
+                })}
+                
+              </option>
+            ))}
+          </select>
           
         </div>
         {error && <p style={{ color: 'red' }}>{error}</p>}

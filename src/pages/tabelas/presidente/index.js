@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import '../style/style-tabelas.css';
 
 function PresidenteHome() {
+  const [bairros, setBairros] = useState([]) 
   const [clientes, setClientes] = useState([]);
   const [searchNome, setSearchNome] = useState('');
   const [filteredClientes, setFilteredClientes] = useState([]);
@@ -16,6 +17,14 @@ function PresidenteHome() {
     }
 
     fetchData();
+    
+    axios.get('http://localhost:8000/bairro') 
+    .then((response) => {
+      setBairros(response.data); 
+    })
+    .catch((error) => {
+      console.error('Erro ao buscar cidades:', error);
+    });
   }, []);
 
   useEffect(() => {
@@ -60,7 +69,14 @@ function PresidenteHome() {
       <ul className="client-list">
         {filteredClientes.map(cliente => (
           <article key={cliente.id} className="client-item">
-            <li className='nome'> {cliente.id} - {cliente.nome}</li>
+            <li className='nome'> {cliente.id} - {cliente.nome}  ({cliente.usuario}) - {cliente.email} -{' '}
+            {bairros.map((bairro) => {
+              while (bairro.id === cliente.codbairro){
+                return <p className='paragrafo' key={cliente.codbairro}>{bairro.nome}</p>
+              }
+              return null;
+            })}
+            </li>
             <Link className='link-update' to={`/update/${cliente.id}`}>Update</Link>
             <button className='link-delete' onClick={() => handleDelete(cliente.id)}>Deletar</button>
           </article>

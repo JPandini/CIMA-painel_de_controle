@@ -68,7 +68,7 @@ function BairroHome() {
       <ul className="client-list">
         {filteredClientes.map((cliente) => (
           <article key={cliente.id} className="client-item">
-            <li className='nome'>
+            <li className='nome'> 
               {cliente.id} - {cliente.nome} -{' '}
               {cidades.map((cidade) => {
                 while (cidade.id === cliente.codcidade) {
