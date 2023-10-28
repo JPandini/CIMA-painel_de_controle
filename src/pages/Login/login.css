@@ -1,0 +1,44 @@
+.geral {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+  }
+  
+  .titulo {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .formulario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+
+  .input-login{
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+
+
+  .botao-acessar{
+    padding: 10px;
+    margin-left: 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: #5967b6; 
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+  button:hover {
+    background-color: #0056b3;
+  }
+  
