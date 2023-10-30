@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 function CadastroUsuario() {
@@ -55,18 +56,18 @@ function CadastroUsuario() {
   };
 
   return (
-    <div className="App">
-      <h1>Enviar Dados para o Backend</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Nome:</label>
-          <input type="text" name="nome" value={inputData.nome} onChange={handleInputChange} />
-          <input type="text" name="usuario" value={inputData.usuario} onChange={handleInputChange} />
-          <input type="text" name="senha" value={inputData.senha} onChange={handleInputChange} />
-          <input type="text" name="endereco" value={inputData.endereco} onChange={handleInputChange} />
-          <input type="text" name="email" value={inputData.email} onChange={handleInputChange} />
-          <input type="text" name="cpf" value={inputData.cpf} onChange={handleInputChange} />
-          <input type="text" name="codendereco" value={inputData.codendereco} onChange={handleInputChange} />
+    <div className="app">
+    <Link className='link-voltar' to={'/usuario'}>Voltar</Link>
+      <h1 className='titulo'>Enviar Dados para o Backend</h1>
+      <form className='form1' onSubmit={handleSubmit}>
+        <div> 
+          <input className='nome-cidade' placeholder="Nome" type="text" name="nome" value={inputData.nome} onChange={handleInputChange} />
+          <input className='nome-cidade'  type="text" name="usuario" value={inputData.usuario} onChange={handleInputChange} />
+          <input className='nome-cidade' type="text" name="senha" value={inputData.senha} onChange={handleInputChange} />
+          <input className='nome-cidade' type="text" name="endereco" value={inputData.endereco} onChange={handleInputChange} />
+          <input className='nome-cidade' type="text" name="email" value={inputData.email} onChange={handleInputChange} />
+          <input className='nome-cidade' type="text" name="cpf" value={inputData.cpf} onChange={handleInputChange} />
+          <input className='nome-cidade' type="text" name="codendereco" value={inputData.codendereco} onChange={handleInputChange} />
         </div>
         {error && <p style={{ color: 'red' }}>{error}</p>}
         <button type="submit">Enviar</button>
