@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Login from "./pages/Login";
+import CadastroAdmin from "./pages/Cadastro";
 import Home from "./pages/Home"
 
 
@@ -36,6 +37,7 @@ return(
 <Header/>
     <Routes>
         <Route path="/login" element={ <Login/> }/>
+        <Route path="/cadastro" element={ <CadastroAdmin/> } />
         <Route path="/" element={ <Home/> }/>
 
         <Route path="/cidade" element={ <CidadeHome/> }/>
