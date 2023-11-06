@@ -1,0 +1,46 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: none;
+}
+
+.geral-tela-update{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+ul {
+    list-style: none;
+    padding: 0; /* Remova a margem padrão */
+  }
+  
+  li {
+    text-decoration: none;
+    margin: 0; /* Remova a margem padrão */
+    display: flex; /* Use flex para alinhar os elementos */
+    align-items: center; /* Alinhe verticalmente os elementos dentro do li */
+  }
+
+
+  .botao-update {
+    padding: 10px;
+    margin-left: 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: #5967b6;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+  }
+  
+  .input-update {
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    width: 200px;
+  }
+
