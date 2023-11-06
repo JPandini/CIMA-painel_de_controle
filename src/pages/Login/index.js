@@ -33,8 +33,8 @@ function Login() {
         setMensagem("Credenciais inválidas. Tente novamente.");
       }
     } catch (error) {
-      console.error("Erro ao fazer login:", error);
-      setMensagem("Ocorreu um erro durante o login. Tente novamente.");
+
+      setMensagem("Credenciais inválidas. Tente novamente.");
     
     }
   };
