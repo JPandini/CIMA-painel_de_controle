@@ -25,7 +25,7 @@ import CadastroUsuario from "./pages/tabelas/usuario/cadastro";
 
 import UpdateCidade from "./pages/tabelas/cidade/update";
 import UpdateBairro from "./pages/tabelas/bairro/update";
-
+import UpdatePresidente from "./pages/tabelas/presidente/update";
 
 import Header from "./components/Header";
 
@@ -57,6 +57,8 @@ return(
 
         <Route path="/updatecidade/:id" element={ <UpdateCidade/> }/>
         <Route path="/updatebairro/:id" element={ <UpdateBairro/> }/>
+        <Route path="/updatepresidente/:id" element={ <UpdatePresidente/> }/>
+
 
 
     </Routes>

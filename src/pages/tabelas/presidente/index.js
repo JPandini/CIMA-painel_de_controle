@@ -77,7 +77,7 @@ function PresidenteHome() {
               return null;
             })}
             </li>
-            <Link className='link-update' to={`/update/${cliente.id}`}>Update</Link>
+            <Link className='link-update' to={`/updatepresidente/${cliente.id}`}>Update</Link>
             <button className='link-delete' onClick={() => handleDelete(cliente.id)}>Deletar</button>
           </article>
         ))}

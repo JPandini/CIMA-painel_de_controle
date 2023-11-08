@@ -5,19 +5,32 @@ import '../style/style-update.css';
 
 
 function UpdateBairro() {
-  const [cidades, setCidades] = useState([]);
+  const [bairros, setBairros] = useState([]);
   const [novoNome, setNovoNome] = useState("");
+  const [cidades, setCidades] = useState([]);
+  const [inputData, setInputData] = useState({ nome: '', codcidade: '' });
+
+
   const { id } = useParams();
   const navigate = useNavigate();
 
 
-  // Função para buscar os dados da cidade
   useEffect(() => {
-    async function loadCidade() {
+    axios.get('http://localhost:8000/cidade') 
+      .then((response) => {
+        setCidades(response.data); 
+      })
+      .catch((error) => {
+        console.error('Erro ao buscar cidades:', error);
+      });
+  }, []); 
+
+  useEffect(() => {
+    async function loadBairro() {
       try {
         const response = await axios.get(`http://localhost:8000/bairro/${id}`);
         if (Array.isArray(response.data.data)) { // Verifique se a resposta contém um array
-          setCidades(response.data.data);
+          setBairros(response.data.data);
           console.log("Dados da cidade:", response.data.data);
         } else {
           console.error("Resposta da API não contém um array:", response.data);
@@ -26,34 +39,57 @@ function UpdateBairro() {
         console.error("Erro ao buscar os dados:", error);
       }
     }
-    loadCidade();
+    loadBairro();
   }, [id]);
   
   
 
-  // Função para atualizar o nome da cidade
   async function handleUpdate() {
     try {
-      const response = await axios.patch(`http://localhost:8000/bairro/${id}`, {
-        nome: novoNome,
-      });
-      setCidades({ ...cidades, nome: response.data.nome });
-      alert("Atualização realizada com sucesso");
-      navigate("/cidade");
-
+      if (inputData.codcidade !== "") {
+        const response = await axios.patch(`http://localhost:8000/bairro/${id}`, {
+          nome: novoNome,
+          codcidade: inputData.codcidade,
+        });
+        setBairros({ ...bairros, nome: response.data.nome });
+        alert("Atualização realizada com sucesso");
+        navigate("/bairro");
+      } else {
+        alert("Por favor, selecione uma cidade.");
+      }
     } catch (error) {
       console.error("Erro ao atualizar os dados:", error);
     }
   }
+  
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setInputData((prevData) => ({ ...prevData, [name]: value }));
+  };
 
   return (
     <div className="geral-tela-update">
       <h1 className="titulo-update-screen">Update</h1>
       <ul className="ul-get">
-      {cidades.map((cidade) => (
-        <li className="listagem" key={cidade.id}>{cidade.nome}</li>
+      {bairros.map((bairro) => (
+        <li className="listagem" key={bairro.id}>{bairro.nome}</li>
       ))}
       </ul>
+
+      <select
+            className='select'
+            name="codcidade"
+            value={inputData.codcidade}
+            onChange={handleInputChange}
+          >
+            <option value="">Selecione a cidade</option>
+            {cidades.map((cidade) => (
+              <option  key={cidade.id} value={cidade.id}>
+                {cidade.nome}
+              </option>
+            ))}
+          </select>
 
       <input
         className="input-update"
