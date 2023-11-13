@@ -1,4 +1,6 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+
+
 
 import Login from "./pages/Login";
 import CadastroAdmin from "./pages/Cadastro";
@@ -29,6 +31,17 @@ import UpdatePresidente from "./pages/tabelas/presidente/update";
 
 import Header from "./components/Header";
 
+export const PrivateRoute = ({ children }) => {
+    const token = localStorage.getItem('token');
+    const navigate = Navigate(); //erro esta aqui no navigate tranforme em normal pq tava na função do react router dom
+  
+    if (token) {
+      return children;
+    }
+  
+    navigate("/login"); // Redirecionar para a página de login caso não esteja autenticado
+    return null;
+  };
 
 function RouteApp(){
 return(
@@ -37,7 +50,9 @@ return(
     <Routes>
         <Route path="/login" element={ <Login/> }/>
         <Route path="/cadastro" element={ <CadastroAdmin/> } />
-        <Route path="/" element={ <Home/> }/>
+        <Route path="/" element={<PrivateRoute> <Home/> </PrivateRoute>} />
+
+        <Route path="/teste" element={<PrivateRoute> <Home/> </PrivateRoute>} />
 
         <Route path="/cidade" element={ <CidadeHome/> }/>
         <Route path="/bairro" element={ <BairroHome/> }/>

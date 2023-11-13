@@ -25,11 +25,10 @@ function Login() {
       const response = await axios.post('http://localhost:8000/adminlogin', formData);
 
       if (response.status === 200) {
+        localStorage.setItem('token', response.data.token); // Armazene o token no localStorage
         setMensagem("Login bem-sucedido");
-        // Navegar para a página após o login
-        navigate("/"); // Certifique-se de que a rota '/dashboard' exista
+        navigate("/"); // Rota após o login
       } else {
-        console.log(response.data);
         setMensagem("Credenciais inválidas. Tente novamente.");
       }
     } catch (error) {
