@@ -11,7 +11,7 @@ function CadastroPresidente() {
 
 
   useEffect(() => {
-    axios.get('http://localhost:8000/bairro') 
+    axios.get('https://cima-production.up.railway.app/bairro') 
       .then((response) => {
         setBairros(response.data); 
       })
@@ -19,7 +19,7 @@ function CadastroPresidente() {
         console.error('Erro ao buscar cidades:', error);
       });
   }, []); 
-  axios.get('http://localhost:8000/cidade')
+  axios.get('https://cima-production.up.railway.app/cidade')
       .then((response) => {
         setCidades(response.data);
       })
@@ -55,7 +55,7 @@ function CadastroPresidente() {
     }
 
     try {
-      const response = await axios.post('http://localhost:8000/presidente/', inputData); // Substitua a URL pela rota correta em seu backend
+      const response = await axios.post('https://cima-production.up.railway.app/presidente/', inputData); // Substitua a URL pela rota correta em seu backend
       console.log('Dados enviados com sucesso:', response.data);
       alert("Cadastro realizado com sucesso!")
     } catch (error) {

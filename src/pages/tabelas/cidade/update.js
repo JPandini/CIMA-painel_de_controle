@@ -15,7 +15,7 @@ function UpdateCidade() {
   useEffect(() => {
     async function loadCidade() {
       try {
-        const response = await axios.get(`http://localhost:8000/cidade/${id}`);
+        const response = await axios.get(`https://cima-production.up.railway.app/cidade/${id}`);
         if (Array.isArray(response.data.data)) { // Verifique se a resposta contém um array
           setCidades(response.data.data);
           console.log("Dados da cidade:", response.data.data);
@@ -34,7 +34,7 @@ function UpdateCidade() {
   // Função para atualizar o nome da cidade
   async function handleUpdate() {
     try {
-      const response = await axios.patch(`http://localhost:8000/cidade/${id}`, {
+      const response = await axios.patch(`https://cima-production.up.railway.app/cidade/${id}`, {
         nome: novoNome,
       });
       setCidades({ ...cidades, nome: response.data.nome });

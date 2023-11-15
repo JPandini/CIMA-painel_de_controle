@@ -11,12 +11,12 @@ function BairroHome() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get('http://localhost:8000/bairro/');
+      const response = await axios.get('https://cima-production.up.railway.app/bairro');
       setClientes(response.data);
       setFilteredClientes(response.data);
     }
 
-    axios.get('http://localhost:8000/cidade')
+    axios.get('https://cima-production.up.railway.app/cidade')
       .then((response) => {
         setCidades(response.data);
       })
@@ -37,7 +37,7 @@ function BairroHome() {
   const handleDelete = async (id) => {
     if (!isNaN(id)) {
       try {
-        const response = await axios.delete(`http://localhost:8000/bairro/${id}`);
+        const response = await axios.delete(`https://cima-production.up.railway.app/bairro${id}`);
         console.log('Item deletado com sucesso!', response.data);
         window.location.reload();
         alert('Usuário deletado com sucesso!');

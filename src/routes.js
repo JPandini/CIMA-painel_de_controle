@@ -1,9 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import { history } from "./history";
+
 import Login from "./pages/Login";
 import CadastroAdmin from "./pages/Cadastro";
 import Home from "./pages/Home"
-
+import NotFound from "./pages/NotFound";
 
 import CidadeHome from "./pages/tabelas/cidade/index";
 import BairroHome from "./pages/tabelas/bairro/index";
@@ -29,15 +31,18 @@ import UpdatePresidente from "./pages/tabelas/presidente/update";
 
 import Header from "./components/Header";
 
+import PrivateRoute from "./components/PrivateRotes";
+import PublicRoute from "./components/PublicRotes";
 
 function RouteApp(){
 return(
-<BrowserRouter>
+<BrowserRouter history={history}>
 <Header/>
     <Routes>
-        <Route path="/login" element={ <Login/> }/>
+        <PublicRoute path="/login" element={ <Login/> }/>
         <Route path="/cadastro" element={ <CadastroAdmin/> } />
-        <Route path="/" element={ <Home/> }/>
+        <PrivateRoute exact path="/" element={ <Home/> }/>
+        
 
         <Route path="/cidade" element={ <CidadeHome/> }/>
         <Route path="/bairro" element={ <BairroHome/> }/>
@@ -60,6 +65,7 @@ return(
         <Route path="/updatepresidente/:id" element={ <UpdatePresidente/> }/>
 
 
+        <Route path="*" element={ <NotFound /> }/>
 
     </Routes>
 </BrowserRouter>

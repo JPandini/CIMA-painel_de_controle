@@ -16,7 +16,7 @@ function UpdatePresidente() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('http://localhost:8000/bairro')
+    axios.get('https://cima-production.up.railway.app/bairro')
       .then((response) => {
         setBairros(response.data);
       })
@@ -24,7 +24,7 @@ function UpdatePresidente() {
         console.error('Erro ao buscar cidades:', error);
       });
 
-    axios.get('http://localhost:8000/cidade')
+    axios.get('https://cima-production.up.railway.app/cidade')
       .then((response) => {
         setCidades(response.data);
       })
@@ -36,7 +36,7 @@ function UpdatePresidente() {
   useEffect(() => {
     async function loadPresidente() {
       try {
-        const response = await axios.get(`http://localhost:8000/presidente/${id}`);
+        const response = await axios.get(`https://cima-production.up.railway.app/presidente/${id}`);
         if (Array.isArray(response.data.data)) {
           setPresidentes(response.data.data);
           console.log("Dados do presidente:", response.data.data);
@@ -53,7 +53,7 @@ function UpdatePresidente() {
   async function handleUpdate() {
     try {
       if (inputData.codbairro !== "") {
-        const response = await axios.patch(`http://localhost:8000/presidente/${id}`, {
+        const response = await axios.patch(`https://cima-production.up.railway.app/presidente/${id}`, {
           nome: novoNome,
           usuario: novoUsuario,
           senha: presidentes[0].senha, // Mantenha a senha atual

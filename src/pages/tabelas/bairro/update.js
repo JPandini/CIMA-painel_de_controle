@@ -16,7 +16,7 @@ function UpdateBairro() {
 
 
   useEffect(() => {
-    axios.get('http://localhost:8000/cidade') 
+    axios.get('https://cima-production.up.railway.app/cidade') 
       .then((response) => {
         setCidades(response.data); 
       })
@@ -28,7 +28,7 @@ function UpdateBairro() {
   useEffect(() => {
     async function loadBairro() {
       try {
-        const response = await axios.get(`http://localhost:8000/bairro/${id}`);
+        const response = await axios.get(`https://cima-production.up.railway.app/bairro/${id}`);
         if (Array.isArray(response.data.data)) { // Verifique se a resposta contém um array
           setBairros(response.data.data);
           console.log("Dados da cidade:", response.data.data);
@@ -47,7 +47,7 @@ function UpdateBairro() {
   async function handleUpdate() {
     try {
       if (inputData.codcidade !== "") {
-        const response = await axios.patch(`http://localhost:8000/bairro/${id}`, {
+        const response = await axios.patch(`https://cima-production.up.railway.app/bairro/${id}`, {
           nome: novoNome,
           codcidade: inputData.codcidade,
         });

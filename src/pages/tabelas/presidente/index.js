@@ -11,14 +11,14 @@ function PresidenteHome() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get('http://localhost:8000/presidente/');
+      const response = await axios.get('https://cima-production.up.railway.app/presidente/');
       setClientes(response.data);
       setFilteredClientes(response.data);
     }
 
     fetchData();
     
-    axios.get('http://localhost:8000/bairro') 
+    axios.get('https://cima-production.up.railway.app/bairro') 
     .then((response) => {
       setBairros(response.data); 
     })
@@ -38,7 +38,7 @@ function PresidenteHome() {
   const handleDelete = async (id) => {
     if (!isNaN(id)) {
       try {
-        const response = await axios.delete(`http://localhost:8000/presidente/${id}`);
+        const response = await axios.delete(`https://cima-production.up.railway.app/presidente/${id}`);
         console.log('Item deletado com sucesso!', response.data);
         window.location.reload();
         alert("Usuário deletado com sucesso!")

@@ -10,7 +10,7 @@ function GrupoHome() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get('http://localhost:8000/grupo/');
+      const response = await axios.get('https://cima-production.up.railway.app/grupo/');
       setClientes(response.data);
       setFilteredClientes(response.data);
     }
@@ -29,7 +29,7 @@ function GrupoHome() {
   const handleDelete = async (id) => {
     if (!isNaN(id)) {
       try {
-        const response = await axios.delete(`http://localhost:8000/grupo/${id}`);
+        const response = await axios.delete(`https://cima-production.up.railway.app/grupo/${id}`);
         console.log('Item deletado com sucesso!', response.data);
         window.location.reload();
         alert("Usuário deletado com sucesso!")

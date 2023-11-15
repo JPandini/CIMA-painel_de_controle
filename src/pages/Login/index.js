@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios"; // Importar o Axios
 import "./login.css";
+import { login } from "../../utils/auth";
+import { history } from "../../history";
 
 function Login() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     senha: "",
@@ -22,12 +24,15 @@ function Login() {
 
     try {
       // Fazer uma solicitação POST para a sua API
-      const response = await axios.post('http://localhost:8000/adminlogin', formData);
+      const response = await axios.post('https://cima-production.up.railway.app/adminlogin', formData);
 
       if (response.status === 200) {
         setMensagem("Login bem-sucedido");
-        // Navegar para a página após o login
-        navigate("/"); // Certifique-se de que a rota '/dashboard' exista
+        login('abc123')
+        history.push('/')
+        navigate('/')
+
+        
       } else {
         console.log(response.data);
         setMensagem("Credenciais inválidas. Tente novamente.");

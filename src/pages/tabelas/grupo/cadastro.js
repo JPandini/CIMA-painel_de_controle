@@ -18,7 +18,7 @@ function CadastroGrupo() {
     }
 
     try {
-      const response = await axios.post('http://localhost:8000/grupo/', inputData);
+      const response = await axios.post('https://cima-production.up.railway.app/grupo/', inputData);
       console.log('Dados enviados com sucesso:', response.data);
       alert("Cadastro realizado com sucesso!")
     } catch (error) {

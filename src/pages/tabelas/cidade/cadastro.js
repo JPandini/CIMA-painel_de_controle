@@ -15,7 +15,7 @@ function CadastroCidade() {
       setError('O campo Cidade não pode estar vazio.');
     } else {
     try {
-      const response = await axios.post('http://localhost:8000/cidade/', inputData); 
+      const response = await axios.post('https://cima-production.up.railway.app/cidade/', inputData); 
       console.log('Dados enviados com sucesso:', response.data);
       alert("Cadastro realizado com sucesso!")
     } catch (error) {

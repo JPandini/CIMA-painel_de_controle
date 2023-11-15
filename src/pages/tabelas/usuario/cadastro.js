@@ -42,7 +42,7 @@ function CadastroUsuario() {
     }
 
     try {
-      const response = await axios.post('http://localhost:8000/usuario/', inputData); // Substitua a URL pela rota correta em seu backend
+      const response = await axios.post('https://cima-production.up.railway.app/usuario/', inputData); // Substitua a URL pela rota correta em seu backend
       console.log('Dados enviados com sucesso:', response.data);
       alert("Cadastro realizado com sucesso!")
     } catch (error) {
