@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
-import axios from "axios"; // Importar o Axios
+import axios from "axios";
 import "./login.css";
-import { login } from "../../utils/auth";
-import { history } from "../../history";
 
-function Login() {
+function Login(setIsAuthenticated) {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
@@ -19,31 +17,56 @@ function Login() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const handleLogin = async () => {
     try {
-      // Fazer uma solicitação POST para a sua API
       const response = await axios.post('https://cima-production.up.railway.app/adminlogin', formData);
 
       if (response.status === 200) {
-        setMensagem("Login bem-sucedido");
-        login('abc123')
-        history.push('/')
-        navigate('/')
+        setIsAuthenticated(true);
+        localStorage.setItem('token', response.data.token);
 
-        
+        setMensagem("Login bem-sucedido");
+        navigate('/');
       } else {
         console.log(response.data);
         setMensagem("Credenciais inválidas. Tente novamente.");
       }
     } catch (error) {
-
+      console.error('Erro durante o login', error);
       setMensagem("Credenciais inválidas. Tente novamente.");
-    
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleLogin();
+    getAuthenticatedData(); 
+
+  };
+
+  // Função para obter dados autenticados
+  const getAuthenticatedData = async () => {
+    try {
+      const token = localStorage.getItem('token');
+  
+      if (!token) {
+        console.error('Token não encontrado. Usuário não autenticado.');
+        return;
+      }
+  
+      const response = await axios.get('https://cima-production.up.railway.app/api/dados-autenticados', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+  
+      console.log(response.data);
+    } catch (error) {
+      console.error('Erro ao obter dados autenticados', error);
+    }
+  };
+
+  
   return (
     <div className="geral">
       <h2 className="titulo">Login</h2>
