@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import "./login.css";
 
-function Login({setIsAuthenticated}) {
+function Login({ setIsAuthenticated }) {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
@@ -27,7 +27,7 @@ function Login({setIsAuthenticated}) {
 
         setMensagem("Login bem-sucedido");
         navigate('/');
-      } else {
+      } else { 
         console.log(response.data);
         setMensagem("Credenciais inválidas. Tente novamente.");
       }
@@ -37,36 +37,47 @@ function Login({setIsAuthenticated}) {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    handleLogin();
-    getAuthenticatedData(); 
-
+    await handleLogin();
+    await getAuthenticatedData();
   };
 
   // Função para obter dados autenticados
   const getAuthenticatedData = async () => {
     try {
       const token = localStorage.getItem('token');
-  
+
       if (!token) {
         console.error('Token não encontrado. Usuário não autenticado.');
         return;
       }
-  
+
       const response = await axios.get('https://cima-production.up.railway.app/api/dados-autenticados', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-  
+
       console.log(response.data);
     } catch (error) {
+      localStorage.removeItem('token');
+      navigate('/login');
+
       console.error('Erro ao obter dados autenticados', error);
     }
   };
 
-  
+  // Verificar autenticação ao montar o componente
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      // Token presente, verificar autenticação
+      getAuthenticatedData();
+    }
+  }, []);
+
   return (
     <div className="geral">
       <h2 className="titulo">Login</h2>
