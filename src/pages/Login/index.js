@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import "./login.css";
 
-function Login(setIsAuthenticated) {
+function Login({setIsAuthenticated}) {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",

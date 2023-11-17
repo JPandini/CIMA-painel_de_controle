@@ -1,6 +1,7 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import PrivateRoute from './privateRoute';
 
-import { history } from "./history";
 
 import Login from "./pages/Login";
 import CadastroAdmin from "./pages/Cadastro";
@@ -29,21 +30,25 @@ import UpdateCidade from "./pages/tabelas/cidade/update";
 import UpdateBairro from "./pages/tabelas/bairro/update";
 import UpdatePresidente from "./pages/tabelas/presidente/update";
 
-import Header from "./components/Header";
 
-import PrivateRoute from "./components/PrivateRotes";
-import PublicRoute from "./components/PublicRotes";
 
 function RouteApp(){
-return(
-<BrowserRouter history={history}>
-<Header/>
-    <Routes>
-        <PublicRoute path="/login" element={ <Login/> }/>
-        <Route path="/cadastro" element={ <CadastroAdmin/> } />
-        <PrivateRoute exact path="/" element={ <Home/> }/>
-        
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    
+    /* const auth = { isAuthenticated: true }; */
 
+return(
+<Router>
+    <Routes>
+        <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+        <Route path="/" element={<PrivateRoute auth={{ isAuthenticated, setIsAuthenticated }}><Home /></PrivateRoute>} />
+        <Route path="/cadastro" element={<CadastroAdmin />} />
+
+{/*<PrivateRoute path="/" element={<Home />} isAuthenticated={isAuthenticated} />*/}
+
+
+
+           
         <Route path="/cidade" element={ <CidadeHome/> }/>
         <Route path="/bairro" element={ <BairroHome/> }/>
         <Route path="/grupo" element={ <GrupoHome/> }/>
@@ -68,7 +73,7 @@ return(
         <Route path="*" element={ <NotFound /> }/>
 
     </Routes>
-</BrowserRouter>
+</Router>
     )
 }
 export default RouteApp;
