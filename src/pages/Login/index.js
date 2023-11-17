@@ -20,14 +20,14 @@ function Login({ setIsAuthenticated }) {
   const handleLogin = async () => {
     try {
       const response = await axios.post('https://cima-production.up.railway.app/adminlogin', formData);
-
+  
       if (response.status === 200) {
         setIsAuthenticated(true);
         localStorage.setItem('token', response.data.token);
-
+  
         setMensagem("Login bem-sucedido");
         navigate('/');
-      } else { 
+      } else {
         console.log(response.data);
         setMensagem("Credenciais inválidas. Tente novamente.");
       }
@@ -36,6 +36,7 @@ function Login({ setIsAuthenticated }) {
       setMensagem("Credenciais inválidas. Tente novamente.");
     }
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -76,7 +77,7 @@ function Login({ setIsAuthenticated }) {
       // Token presente, verificar autenticação
       getAuthenticatedData();
     }
-  }, [getAuthenticatedData]); 
+  }, [navigate, getAuthenticatedData]); 
 
   return (
     <div className="geral">

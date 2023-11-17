@@ -1,14 +1,28 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import './home.css'
-
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import './home.css';
 
 function Home()  {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            navigate('/'); // Redirecionar para a tela de login se o token não estiver presente
+        }
+        else{
+            navigate('/');
+        }
+    }, [navigate]);
 
     const handleLogout = () => {
-
-
+        // Implemente a lógica de logout, removendo o token do armazenamento local, etc.
+        localStorage.removeItem('token');
+        navigate('/login'); // Redirecionar para a tela de login após o logout
     }
+
+
     return(
         <div>
         <div className="tabelas">
