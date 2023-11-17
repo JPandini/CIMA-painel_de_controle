@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import "./login.css";
@@ -44,7 +44,7 @@ function Login({ setIsAuthenticated }) {
   };
 
   // Função para obter dados autenticados
-  const getAuthenticatedData = async () => {
+  const getAuthenticatedData = useCallback(async () => {
     try {
       const token = localStorage.getItem('token');
 
@@ -66,7 +66,7 @@ function Login({ setIsAuthenticated }) {
 
       console.error('Erro ao obter dados autenticados', error);
     }
-  };
+  }, [navigate]);
 
   // Verificar autenticação ao montar o componente
   useEffect(() => {
@@ -76,7 +76,7 @@ function Login({ setIsAuthenticated }) {
       // Token presente, verificar autenticação
       getAuthenticatedData();
     }
-  }, []);
+  }, [getAuthenticatedData]); 
 
   return (
     <div className="geral">
