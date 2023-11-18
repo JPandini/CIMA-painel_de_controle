@@ -21,7 +21,7 @@ function CadastroAdmin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://cima-production.up.railway.app//admin', formData);
+      const response = await axios.post('https://cima-production.up.railway.app/admin', formData);
       
       if (response.status === 201) {
         setMensagem('Cadastro realizado com sucesso');

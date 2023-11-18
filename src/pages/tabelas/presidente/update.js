@@ -7,10 +7,10 @@ function UpdatePresidente() {
   const [presidentes, setPresidentes] = useState([]);
   const [novoNome, setNovoNome] = useState("");
   const [novoUsuario, setNovoUsuario] = useState("");
-
   const [inputData, setInputData] = useState({ nome: '', codbairro: '' });
   const [bairros, setBairros] = useState([]);
   const [cidades, setCidades] = useState([]);
+  const [errors, setErrors] = useState({ nome: '', usuario: '', bairro: '' });
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ function UpdatePresidente() {
         setBairros(response.data);
       })
       .catch((error) => {
-        console.error('Erro ao buscar cidades:', error);
+        console.error('Erro ao buscar bairros:', error);
       });
 
     axios.get('https://cima-production.up.railway.app/cidade')
@@ -51,6 +51,20 @@ function UpdatePresidente() {
   }, [id]);
 
   async function handleUpdate() {
+    if (novoNome.trim() === '') {
+      setErrors({ ...errors, nome: 'O campo nome não pode estar vazio.' });
+      return;
+    } else {
+      setErrors({ ...errors, nome: '' });
+    }
+
+    if (novoUsuario.trim() === '') {
+      setErrors({ ...errors, usuario: 'O campo usuário não pode estar vazio.' });
+      return;
+    } else {
+      setErrors({ ...errors, usuario: '' });
+    }
+
     try {
       if (inputData.codbairro !== "") {
         const response = await axios.patch(`https://cima-production.up.railway.app/presidente/${id}`, {
@@ -64,7 +78,7 @@ function UpdatePresidente() {
         alert("Atualização realizada com sucesso");
         navigate("/presidente");
       } else {
-        alert("Por favor, selecione um bairro.");
+        setErrors({ ...errors, bairro: 'Por favor, selecione um bairro.' });
       }
     } catch (error) {
       console.error("Erro ao atualizar os dados:", error);
@@ -73,7 +87,7 @@ function UpdatePresidente() {
 
   const handleInputChange = (e) => {
     const { name, usuario, value } = e.target;
-    setInputData((prevData) => ({ ...prevData, [name]: value, [usuario]:value }));
+    setInputData((prevData) => ({ ...prevData, [name]: value, [usuario]: value }));
   };
 
   return (
@@ -96,8 +110,8 @@ function UpdatePresidente() {
           <option key={bairro.id} value={bairro.id}>
             {bairro.nome} -
             {cidades.map((cidade) => {
-              while (cidade.id === bairro.codcidade) {
-                return <p className='paragrafo' key={bairro.codcidade}> {cidade.nome}</p>;
+              if (cidade.id === bairro.codcidade) {
+                return <span className='paragrafo' key={bairro.codcidade}> {cidade.nome}</span>;
               }
               return null;
             })}
@@ -112,6 +126,7 @@ function UpdatePresidente() {
         value={novoNome}
         onChange={(e) => setNovoNome(e.target.value)}
       />
+      {errors.nome && <p className="error-text">{errors.nome}</p>}
 
       <input
         className="input-update"
@@ -120,8 +135,11 @@ function UpdatePresidente() {
         value={novoUsuario}
         onChange={(e) => setNovoUsuario(e.target.value)}
       />
+      {errors.usuario && <p className="error-text">{errors.usuario}</p>}
+      {errors.bairro && <p className="error-text">{errors.bairro}</p>}
 
       <button className="botao-update" onClick={handleUpdate}>Atualizar</button>
+      
     </div>
   );
 }

@@ -30,7 +30,6 @@ function Home()  {
         <ul className="lista-banco">
             <li className="lista-bairro"><Link to={"/bairro"} className="links">bairros</Link></li>
             <li className="lista-cidade"><Link to={"/cidade"} className="links" >cidades</Link></li>
-            <li className="lista-grupo"><Link to={"/grupo"} className="links">grupos</Link></li>
             <li className="lista-mensagens"><Link to={"/mensagem"} className="links">mensagens</Link></li>
             <li className="lista-postagens"><Link to={"/postagem"} className="links">postagens</Link></li>
             <li className="lista-presidente"><Link to={"/presidente"} className="links">presidentes</Link></li>
