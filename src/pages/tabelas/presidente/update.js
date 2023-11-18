@@ -7,10 +7,11 @@ function UpdatePresidente() {
   const [presidentes, setPresidentes] = useState([]);
   const [novoNome, setNovoNome] = useState("");
   const [novoUsuario, setNovoUsuario] = useState("");
+
   const [inputData, setInputData] = useState({ nome: '', codbairro: '' });
   const [bairros, setBairros] = useState([]);
   const [cidades, setCidades] = useState([]);
-  const [errors, setErrors] = useState({ nome: '', usuario: '', bairro: '' });
+  const [error, setError] = useState('');
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ function UpdatePresidente() {
         setBairros(response.data);
       })
       .catch((error) => {
-        console.error('Erro ao buscar bairros:', error);
+        console.error('Erro ao buscar cidades:', error);
       });
 
     axios.get('https://cima-production.up.railway.app/cidade')
@@ -50,44 +51,39 @@ function UpdatePresidente() {
     loadPresidente();
   }, [id]);
 
-  async function handleUpdate() {
-    if (novoNome.trim() === '') {
-      setErrors({ ...errors, nome: 'O campo nome não pode estar vazio.' });
-      return;
-    } else {
-      setErrors({ ...errors, nome: '' });
-    }
-
-    if (novoUsuario.trim() === '') {
-      setErrors({ ...errors, usuario: 'O campo usuário não pode estar vazio.' });
-      return;
-    } else {
-      setErrors({ ...errors, usuario: '' });
-    }
-
+  const handleUpdate = async () => {
     try {
-      if (inputData.codbairro !== "") {
-        const response = await axios.patch(`https://cima-production.up.railway.app/presidente/${id}`, {
-          nome: novoNome,
-          usuario: novoUsuario,
-          senha: presidentes[0].senha, // Mantenha a senha atual
-          email: presidentes[0].email, // Mantenha o email atual
-          codbairro: inputData.codbairro,
-        });
-        setPresidentes({ ...presidentes, nome: response.data.nome });
-        alert("Atualização realizada com sucesso");
-        navigate("/presidente");
-      } else {
-        setErrors({ ...errors, bairro: 'Por favor, selecione um bairro.' });
+      if (novoNome.trim() === '') {
+        setError('O campo nome não pode estar vazio.');
+        return;
       }
+      if (novoUsuario.trim() === '') {
+        setError('O campo usuário não pode estar vazio.');
+        return;
+      }
+      if (inputData.codbairro === '') {
+        setError('Por favor, selecione um bairro.');
+        return;
+      }
+
+      const response = await axios.patch(`https://cima-production.up.railway.app/presidente/${id}`, {
+        nome: novoNome,
+        usuario: novoUsuario,
+        senha: presidentes[0].senha, // Mantenha a senha atual
+        email: presidentes[0].email, // Mantenha o email atual
+        codbairro: inputData.codbairro,
+      });
+      setPresidentes({ ...presidentes, nome: response.data.nome });
+      alert("Atualização realizada com sucesso");
+      navigate("/presidente");
     } catch (error) {
       console.error("Erro ao atualizar os dados:", error);
     }
-  }
+  };
 
   const handleInputChange = (e) => {
-    const { name, usuario, value } = e.target;
-    setInputData((prevData) => ({ ...prevData, [name]: value, [usuario]: value }));
+    const { name, value } = e.target;
+    setInputData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   return (
@@ -111,7 +107,7 @@ function UpdatePresidente() {
             {bairro.nome} -
             {cidades.map((cidade) => {
               if (cidade.id === bairro.codcidade) {
-                return <span className='paragrafo' key={bairro.codcidade}> {cidade.nome}</span>;
+                return <p className='paragrafo' key={bairro.codcidade}> {cidade.nome}</p>;
               }
               return null;
             })}
@@ -126,7 +122,6 @@ function UpdatePresidente() {
         value={novoNome}
         onChange={(e) => setNovoNome(e.target.value)}
       />
-      {errors.nome && <p className="error-text">{errors.nome}</p>}
 
       <input
         className="input-update"
@@ -135,11 +130,9 @@ function UpdatePresidente() {
         value={novoUsuario}
         onChange={(e) => setNovoUsuario(e.target.value)}
       />
-      {errors.usuario && <p className="error-text">{errors.usuario}</p>}
-      {errors.bairro && <p className="error-text">{errors.bairro}</p>}
-
-      <button className="botao-update" onClick={handleUpdate}>Atualizar</button>
       
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      <button className="botao-update" onClick={handleUpdate}>Atualizar</button>
     </div>
   );
 }
