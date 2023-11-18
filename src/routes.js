@@ -41,11 +41,14 @@ return(
 <Header/>
 
     <Routes>
-        <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
-        <Route path="/" element={<PrivateRoute auth={{ isAuthenticated, setIsAuthenticated }}><Home /></PrivateRoute>} />
-        <Route path="/cadastro" element={<CadastroAdmin />} />
+        <Route path='/login' element={<Login/>}/>
 
-{/*<PrivateRoute path="/" element={<Home />} isAuthenticated={isAuthenticated} />*/}
+        <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+
+        {/*<Route path="/" element={<PrivateRoute auth={{ isAuthenticated, setIsAuthenticated }}><Home /></PrivateRoute>} />*/}        <Route path="/cadastro" element={<CadastroAdmin />} />
+
+        <Route path='/' element={<Home/>} />
+        {/*<PrivateRoute path="/" element={<Home />} isAuthenticated={isAuthenticated} />*/}
 
 
 
