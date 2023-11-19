@@ -43,7 +43,7 @@ return(
     <Routes>
         <Route path='/login' element={<Login/>}/>
 
-        <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+        {/* <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} /> */}
 
         {/*<Route path="/" element={<PrivateRoute auth={{ isAuthenticated, setIsAuthenticated }}><Home /></PrivateRoute>} />*/}        <Route path="/cadastro" element={<CadastroAdmin />} />
 
