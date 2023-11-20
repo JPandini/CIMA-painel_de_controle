@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { useParams,  useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import '../style/style-update.css';
-
 
 function UpdateCidade() {
   const [cidades, setCidades] = useState([]);
   const [novoNome, setNovoNome] = useState("");
   const { id } = useParams();
   const navigate = useNavigate();
-
+  const [error, setError] = useState('');
 
   // Função para buscar os dados da cidade
   useEffect(() => {
     async function loadCidade() {
       try {
         const response = await axios.get(`https://cima-production.up.railway.app/cidade/${id}`);
-        if (Array.isArray(response.data.data)) { // Verifique se a resposta contém um array
+        if (Array.isArray(response.data.data)) {
           setCidades(response.data.data);
           console.log("Dados da cidade:", response.data.data);
         } else {
@@ -28,19 +27,22 @@ function UpdateCidade() {
     }
     loadCidade();
   }, [id]);
-  
-  
 
   // Função para atualizar o nome da cidade
   async function handleUpdate() {
     try {
+      if (novoNome.trim() === '') {
+        setError('O campo nome não pode estar vazio.');
+        return;
+      }
+
       const response = await axios.patch(`https://cima-production.up.railway.app/cidade/${id}`, {
         nome: novoNome,
       });
+
       setCidades({ ...cidades, nome: response.data.nome });
       alert("Atualização realizada com sucesso");
       navigate("/cidade");
-
     } catch (error) {
       console.error("Erro ao atualizar os dados:", error);
     }
@@ -50,9 +52,9 @@ function UpdateCidade() {
     <div className="geral-tela-update">
       <h1 className="titulo-update-screen">Update</h1>
       <ul className="ul-get">
-      {cidades.map((cidade) => (
-        <li className="listagem" key={cidade.id}>{cidade.nome}</li>
-      ))}
+        {cidades.map((cidade) => (
+          <li className="listagem" key={cidade.id}>{cidade.nome}</li>
+        ))}
       </ul>
 
       <input
@@ -63,6 +65,7 @@ function UpdateCidade() {
         onChange={(e) => setNovoNome(e.target.value)}
       />
 
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       <button className="botao-update" onClick={handleUpdate}>Atualizar</button>
     </div>
   );

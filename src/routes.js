@@ -9,6 +9,8 @@ import CadastroAdmin from "./pages/Cadastro";
 import Home from "./pages/Home"
 import NotFound from "./pages/NotFound";
 
+import SolicitacaoHome from "./pages/tabelas/Solicitacao";
+
 import CidadeHome from "./pages/tabelas/cidade/index";
 import BairroHome from "./pages/tabelas/bairro/index";
 import MensagemHome from "./pages/tabelas/mensagem/index";
@@ -31,6 +33,7 @@ import UpdatePresidente from "./pages/tabelas/presidente/update";
 
 
 
+
 function RouteApp(){
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     
@@ -41,14 +44,17 @@ return(
 <Header/>
 
     <Routes>
-        <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
-        <Route path="/" element={<PrivateRoute auth={{ isAuthenticated, setIsAuthenticated }}><Home /></PrivateRoute>} />
-        <Route path="/cadastro" element={<CadastroAdmin />} />
+        <Route path='/login' element={<Login/>}/>
 
-{/*<PrivateRoute path="/" element={<Home />} isAuthenticated={isAuthenticated} />*/}
+        {/* <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} /> */}
+
+        {/*<Route path="/" element={<PrivateRoute auth={{ isAuthenticated, setIsAuthenticated }}><Home /></PrivateRoute>} />*/}        <Route path="/cadastro" element={<CadastroAdmin />} />
+
+        <Route path='/' element={<Home/>} />
+        {/*<PrivateRoute path="/" element={<Home />} isAuthenticated={isAuthenticated} />*/}
 
 
-
+        <Route path="/solicitacao" element={ <SolicitacaoHome/> }/>
            
         <Route path="/cidade" element={ <CidadeHome/> }/>
         <Route path="/bairro" element={ <BairroHome/> }/>
