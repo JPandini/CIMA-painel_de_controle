@@ -9,7 +9,7 @@ function UpdateCidade() {
   const [novoNome, setNovoNome] = useState("");
   const { id } = useParams();
   const navigate = useNavigate();
-
+  
 
   // Função para buscar os dados da cidade
   useEffect(() => {
