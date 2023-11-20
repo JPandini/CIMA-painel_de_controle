@@ -58,7 +58,6 @@ function Home() {
       </div>
       <div className="content">
         <h2 className="titulo-Bem">Bem vindo de volta! </h2>
-        <div className="flex-container">
         
           
             <Chart
@@ -70,7 +69,7 @@ function Home() {
               height={"400px"}
             />
           
-        </div>
+        
       </div>
     </div>
   );
