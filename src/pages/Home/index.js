@@ -8,9 +8,9 @@ import { RiAdminLine } from "react-icons/ri";
 import { FaRegUser } from "react-icons/fa";
 import { IoIosLogOut } from "react-icons/io";
 import { TbUsersPlus } from "react-icons/tb";
-import axios from "axios"; // Importe o Axios
-import socketIOClient from 'socket.io-client';
-import { Chart } from 'react-google-charts';
+import axios from "axios";
+import { Chart } from "react-google-charts";
+
 
 import './home.css';
 
@@ -18,31 +18,28 @@ function Home() {
   const navigate = useNavigate();
   const [dados, setDados] = useState({ usuariosCadastrados: 0, presidentesCadastrados: 0 });
 
-
   useEffect(() => {
-    const socket = socketIOClient('http://localhost:5000'); // Substitua pela URL do seu servidor WebSocket
-
-    // Receber dados do servidor
-    socket.on('dadosAtualizados', (dadosAtualizados) => {
-      setDados(dadosAtualizados);
-    });
-
-    // Limpar o socket ao desmontar o componente
-    return () => socket.disconnect();
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://cima-production.up.railway.app/dadosGrafico');
+        console.log('Dados recebidos:', response.data);
+        setDados(response.data);
+      } catch (error) {
+        console.error('Erro ao obter dados para o gráfico:', error);
+      }
+    };
+  
+    fetchData();
   }, []);
-
+  
 
   useEffect(() => {
-    console.log('useEffect está sendo chamado...');
-  
     const token = localStorage.getItem('token');
-  
+
     if (!token) {
       navigate('/');
     }
   }, [navigate]);
-
-
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -51,8 +48,8 @@ function Home() {
 
   const data = [
     ['Tipo', 'Quantidade'],
-    ['Usuários', dados.usuariosCadastrados],
-    ['Presidentes', dados.presidentesCadastrados],
+    ['Usuários', dados.usuariosCadastrados.length], // Ajuste aqui
+    ['Presidentes', dados.presidentesCadastrados.length], // Ajuste aqui
   ];
 
   return (
@@ -74,24 +71,21 @@ function Home() {
       <div className="content">
         <h2 className="titulo-Bem">Bem vindo de volta! </h2>
         
-        <Chart
-        width={'500px'}
-        height={'300px'}
-        chartType="BarChart"
-        loader={<div>Carregando gráfico...</div>}
-        data={data}
-        options={{
-          title: 'Usuários e Presidentes Cadastrados',
-          chartArea: { width: '50%' },
-          hAxis: {
-            title: 'Quantidade',
-            minValue: 0,
-          },
-          vAxis: {
-            title: 'Tipo',
-          },
-        }}
-      />    
+        <div className="grafico">
+          <Chart
+            width={'500px'}
+            height={'300px'}
+            chartType="PieChart"
+            loader={<div>Carregando gráfico...</div>}
+            data={data}
+            options={{
+              title: 'Usuários e Presidentes Cadastrados',
+              is3D: true, 
+            }}
+            rootProps={{ 'data-testid': '1' }}
+          />
+        </div>
+
 
           
         
