@@ -48,10 +48,9 @@ function Home() {
 
   const data = [
     ['Tipo', 'Quantidade'],
-    ['Usuários', dados.usuariosCadastrados.length], // Ajuste aqui
-    ['Presidentes', dados.presidentesCadastrados.length], // Ajuste aqui
-  ];
-
+    ['Usuários', dados.usuariosCadastrados.length], 
+    ['Presidentes', dados.presidentesCadastrados.length], 
+  ]
   return (
     <div className="container">
       <div className="tabelas">
