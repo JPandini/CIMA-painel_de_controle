@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaLocationDot } from "react-icons/fa6";
 import { MdLocationCity } from "react-icons/md";
@@ -8,36 +8,51 @@ import { RiAdminLine } from "react-icons/ri";
 import { FaRegUser } from "react-icons/fa";
 import { IoIosLogOut } from "react-icons/io";
 import { TbUsersPlus } from "react-icons/tb";
-import { Chart } from "react-google-charts";
+import axios from "axios"; // Importe o Axios
+import socketIOClient from 'socket.io-client';
+import { Chart } from 'react-google-charts';
 
 import './home.css';
 
 function Home() {
   const navigate = useNavigate();
+  const [dados, setDados] = useState({ usuariosCadastrados: 0, presidentesCadastrados: 0 });
+
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const socket = socketIOClient('http://localhost:5000'); // Substitua pela URL do seu servidor WebSocket
 
+    // Receber dados do servidor
+    socket.on('dadosAtualizados', (dadosAtualizados) => {
+      setDados(dadosAtualizados);
+    });
+
+    // Limpar o socket ao desmontar o componente
+    return () => socket.disconnect();
+  }, []);
+
+
+  useEffect(() => {
+    console.log('useEffect está sendo chamado...');
+  
+    const token = localStorage.getItem('token');
+  
     if (!token) {
-      navigate('/');
-    } else {
       navigate('/');
     }
   }, [navigate]);
+
+
 
   const handleLogout = () => {
     localStorage.removeItem('token');
     navigate('/login');
   };
 
-  const options = {
-    title: "CONECTADOS",
-  };
-
   const data = [
-    ["Task", "Hours per Day"],
-    ["Usuarios", 11],
-    ["Presidentes", 2],
+    ['Tipo', 'Quantidade'],
+    ['Usuários', dados.usuariosCadastrados],
+    ['Presidentes', dados.presidentesCadastrados],
   ];
 
   return (
@@ -59,15 +74,25 @@ function Home() {
       <div className="content">
         <h2 className="titulo-Bem">Bem vindo de volta! </h2>
         
-          
-            <Chart
-              className="grafico"
-              chartType="PieChart"
-              data={data}
-              options={options}
-              width={"400px"}
-              height={"400px"}
-            />
+        <Chart
+        width={'500px'}
+        height={'300px'}
+        chartType="BarChart"
+        loader={<div>Carregando gráfico...</div>}
+        data={data}
+        options={{
+          title: 'Usuários e Presidentes Cadastrados',
+          chartArea: { width: '50%' },
+          hAxis: {
+            title: 'Quantidade',
+            minValue: 0,
+          },
+          vAxis: {
+            title: 'Tipo',
+          },
+        }}
+      />    
+
           
         
       </div>
