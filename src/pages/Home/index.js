@@ -58,18 +58,17 @@ function Home() {
                 <ul className="lista-banco">
                     <li className="lista-bairro"><Link to={"/bairro"} className="links"><FaLocationDot/>  BAIRROS</Link></li>
                     <li className="lista-cidade"><Link to={"/cidade"} className="links" ><MdLocationCity />  CIDADES</Link></li>
-                    <li className="lista-mensagens"><Link to={"/mensagem"} className="links"><BsChatRightDots />  MENSAGENS</Link></li>
                     <li className="lista-postagens"><Link to={"/postagem"} className="links"><AiTwotoneEdit />  POSTAGENS</Link></li>
                     <li className="lista-presidente"><Link to={"/presidente"} className="links"><RiAdminLine />  PRESIDENTES</Link></li>
                     <li className="lista-usuario"><Link to={"/usuario"} className="links"><FaRegUser />  USUARIOS</Link></li>
                     <li className="lista-solicitacao"><Link to={"/solicitacao"} className="links"><TbUsersPlus /> SOLICITAÇÕES</Link></li>
                 </ul>
-                <button onClick={handleLogout} className="logout-button"><IoIosLogOut /> Logout</button>
-                <br></br>
       </div>
+
+
+
       <div className="content">
-        <h2 className="titulo-Bem">Bem vindo de volta! </h2>
-        
+        <h2 className="titulo-Bem">Bem vindo de volta! </h2>  
         <div className="grafico">
           <Chart
             width={'500px'}
@@ -85,6 +84,7 @@ function Home() {
           />
         </div>
 
+        <button onClick={handleLogout} className="logout-button"><IoIosLogOut /> Logout</button>
 
           
         
