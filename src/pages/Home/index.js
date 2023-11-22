@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaLocationDot } from "react-icons/fa6";
 import { MdLocationCity } from "react-icons/md";
-import { BsChatRightDots } from "react-icons/bs";
 import { AiTwotoneEdit } from "react-icons/ai";
 import { RiAdminLine } from "react-icons/ri";
 import { FaRegUser } from "react-icons/fa";
@@ -10,7 +9,6 @@ import { IoIosLogOut } from "react-icons/io";
 import { TbUsersPlus } from "react-icons/tb";
 import axios from "axios";
 import { Chart } from "react-google-charts";
-
 
 import './home.css';
 
@@ -21,24 +19,37 @@ function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://cima-production.up.railway.app/dadosGrafico');
-        console.log('Dados recebidos:', response.data);
+        const token = localStorage.getItem('token');
+        console.log('Token:', token);
+          if (!token) {
+          // Se não houver token, redirecione para a página de login
+          navigate('/login');
+          return;
+        }
+  
+        // Verifica se o usuário está autenticado
+        await axios.get('https://cima-production.up.railway.app/dados-autenticados', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+  
+        // Se a verificação passar, então busca os dados do gráfico
+        const response = await axios.get('https://cima-production.up.railway.app/dadosGrafico', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+  
         setDados(response.data);
       } catch (error) {
         console.error('Erro ao obter dados para o gráfico:', error);
+        // Em caso de erro, redirecione para a página de login
+        navigate('/login');
       }
     };
   
     fetchData();
-  }, []);
-  
-
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-
-    if (!token) {
-      navigate('/');
-    }
   }, [navigate]);
 
   const handleLogout = () => {
@@ -46,29 +57,39 @@ function Home() {
     navigate('/login');
   };
 
+  const usuariosNaoNulos = Array.isArray(dados.usuariosCadastrados)
+    ? dados.usuariosCadastrados.filter(usuario => usuario.nome !== null)
+    : [];
+
+  const presidentesNaoNulos = Array.isArray(dados.presidentesCadastrados)
+    ? dados.presidentesCadastrados.filter(presidente => presidente.nome !== null)
+    : [];
+
+  const totalUsuarios = usuariosNaoNulos.length;
+  const totalPresidente = presidentesNaoNulos.length;
+
   const data = [
     ['Tipo', 'Quantidade'],
-    ['Usuários', dados.usuariosCadastrados.length], 
-    ['Presidentes', dados.presidentesCadastrados.length], 
-  ]
+    ['Usuários', totalUsuarios],
+    ['Presidentes', totalPresidente],
+  ];
+
   return (
     <div className="container">
       <div className="tabelas">
-      <h3 className="titulo-tabelas">TABELAS</h3>
-                <ul className="lista-banco">
-                    <li className="lista-bairro"><Link to={"/bairro"} className="links"><FaLocationDot/>  BAIRROS</Link></li>
-                    <li className="lista-cidade"><Link to={"/cidade"} className="links" ><MdLocationCity />  CIDADES</Link></li>
-                    <li className="lista-postagens"><Link to={"/postagem"} className="links"><AiTwotoneEdit />  POSTAGENS</Link></li>
-                    <li className="lista-presidente"><Link to={"/presidente"} className="links"><RiAdminLine />  PRESIDENTES</Link></li>
-                    <li className="lista-usuario"><Link to={"/usuario"} className="links"><FaRegUser />  USUARIOS</Link></li>
-                    <li className="lista-solicitacao"><Link to={"/solicitacao"} className="links"><TbUsersPlus /> SOLICITAÇÕES</Link></li>
-                </ul>
+        <h3 className="titulo-tabelas">TABELAS</h3>
+        <ul className="lista-banco">
+          <li className="lista-bairro"><Link to={"/bairro"} className="links"><FaLocationDot /> BAIRROS</Link></li>
+          <li className="lista-cidade"><Link to={"/cidade"} className="links"><MdLocationCity /> CIDADES</Link></li>
+          <li className="lista-postagens"><Link to={"/postagem"} className="links"><AiTwotoneEdit /> POSTAGENS</Link></li>
+          <li className="lista-presidente"><Link to={"/presidente"} className="links"><RiAdminLine /> PRESIDENTES</Link></li>
+          <li className="lista-usuario"><Link to={"/usuario"} className="links"><FaRegUser /> USUARIOS</Link></li>
+          <li className="lista-solicitacao"><Link to={"/solicitacao"} className="links"><TbUsersPlus /> SOLICITAÇÕES</Link></li>
+        </ul>
       </div>
 
-
-
       <div className="content">
-        <h2 className="titulo-Bem">Bem vindo de volta! </h2>  
+        <h2 className="titulo-Bem">Bem vindo de volta! </h2>
         <div className="grafico">
           <Chart
             width={'500px'}
@@ -78,16 +99,12 @@ function Home() {
             data={data}
             options={{
               title: 'Usuários e Presidentes Cadastrados',
-              is3D: true, 
+              is3D: true,
             }}
-            rootProps={{ 'data-testid': '1' }}
           />
         </div>
 
         <button onClick={handleLogout} className="logout-button"><IoIosLogOut /> Logout</button>
-
-          
-        
       </div>
     </div>
   );

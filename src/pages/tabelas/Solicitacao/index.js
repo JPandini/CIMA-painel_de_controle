@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function SolicitacaoHome() {
+  const [bairros, setBairros] = useState([]) 
   const [clientes, setClientes] = useState([]);
   const [searchNome, setSearchNome] = useState('');
   const [filteredClientes, setFilteredClientes] = useState([]);
@@ -18,6 +19,18 @@ function SolicitacaoHome() {
     }
 
     fetchData();
+
+
+
+    axios.get('https://cima-production.up.railway.app/bairro') 
+    .then((response) => {
+      setBairros(response.data); 
+    })
+    .catch((error) => {
+      console.error('Erro ao buscar cidades:', error);
+    });
+
+
   }, []);
 
   useEffect(() => {
@@ -93,8 +106,15 @@ function SolicitacaoHome() {
       <ul className="client-list">
         {filteredClientes.map(cliente => (
           <article key={cliente.id} className="client-item">
-            <li className='nome'> {cliente.id} - {cliente.nome}</li>
+            <li className='nome'> {cliente.id} - {cliente.nome} ({cliente.usuario}) - {cliente.email} -{' '}
+            {bairros.map((bairro) => {
+              while (bairro.id === cliente.codbairro){
+                return <p className='paragrafo' key={cliente.codbairro}>{bairro.nome}</p>
+              }
+              return null;
+            })}
 
+            </li>
             <button className='link-update' onClick={() => handleDeleteAndAccept(cliente.id, cliente)}>
             Aceitar
             </button>

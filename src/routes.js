@@ -20,9 +20,7 @@ import UsuarioHome from "./pages/tabelas/usuario";
 
 import CadastroCidade from "./pages/tabelas/cidade/cadastro";
 import CadastroBairro from "./pages/tabelas/bairro/cadastro";
-import CadastroPostagem from "./pages/tabelas/postagem/cadastro";
 import CadastroPresidente from "./pages/tabelas/presidente/cadastro";
-import CadastroUsuario from "./pages/tabelas/usuario/cadastro";
 
 
 import UpdateCidade from "./pages/tabelas/cidade/update";
@@ -42,16 +40,15 @@ return(
 <Header/>
 
     <Routes>
-        <Route path='/login' element={<Login/>}/>
+        {/* <Route path='/login' element={<Login/>}/> */}
  
 
-        {/* <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} /> */}
+        <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
 
-        {/*<Route path="/" element={<PrivateRoute auth={{ isAuthenticated, setIsAuthenticated }}><Home /></PrivateRoute>} />*/}      
+        <Route path="/" element={<PrivateRoute auth={{ isAuthenticated, setIsAuthenticated }}><Home /></PrivateRoute>} />      
         <Route path="/cadastro" element={<CadastroAdmin />} />
 
-        <Route path='/' element={<Home/>} />
-        {/*<PrivateRoute path="/" element={<Home />} isAuthenticated={isAuthenticated} />*/}
+{/*      <Route path='/' element={<Home/>} />*/}
 
 
        
@@ -67,9 +64,7 @@ return(
 
         <Route path="/cadastrocidade" element={ <CadastroCidade/> }/>
         <Route path="/cadastrobairro" element={ <CadastroBairro/> }/>
-        <Route path="/cadastropostagem" element={ <CadastroPostagem/> }/>
         <Route path="/cadastropresidente" element={ <CadastroPresidente/> }/>
-        <Route path="/cadastrousuario" element={ <CadastroUsuario/> }/>
 
         <Route path="/updatecidade/:id" element={ <UpdateCidade/> }/>
         <Route path="/updatebairro/:id" element={ <UpdateBairro/> }/>

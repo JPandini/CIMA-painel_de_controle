@@ -26,6 +26,7 @@ function Login({ setIsAuthenticated }) {
         localStorage.setItem('token', response.data.token);
   
         setMensagem("Login bem-sucedido");
+        
         navigate('/');
       } else {
         console.log(response.data);
@@ -54,7 +55,7 @@ function Login({ setIsAuthenticated }) {
         return;
       }
 
-      const response = await axios.get('https://cima-production.up.railway.app/api/dados-autenticados', {
+      const response = await axios.get('https://cima-production.up.railway.app/dados-autenticados', {
         headers: {
           Authorization: `Bearer ${token}`,
         },

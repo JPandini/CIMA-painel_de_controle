@@ -56,7 +56,6 @@ function UsuarioHome() {
         />
         <button onClick={() => setSearchNome('')} className="clear-button">Limpar</button>
       </div>
-      <Link className='link-cadastro' to={"/cadastrousuario"}>Cadastrar</Link>
       <ul className="client-list">
         {filteredClientes.map(cliente => (
           <article key={cliente.id} className="client-item">
