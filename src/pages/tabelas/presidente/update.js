@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import '../style/style-update.css';
+import { toast } from 'react-toastify'
 
 function UpdatePresidente() {
   const [presidentes, setPresidentes] = useState([]);
@@ -74,7 +75,7 @@ function UpdatePresidente() {
         codbairro: inputData.codbairro,
       });
       setPresidentes({ ...presidentes, nome: response.data.nome });
-      alert("Atualização realizada com sucesso");
+      toast.success("Atualização realizada com sucesso");
       navigate("/presidente");
     } catch (error) {
       console.error("Erro ao atualizar os dados:", error);

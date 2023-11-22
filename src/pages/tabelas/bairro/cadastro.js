@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import '../style/style-cadastro.css';
-
+import { toast } from 'react-toastify'
 
 function CadastroBairro() {
   const [inputData, setInputData] = useState({ nome: '', codcidade: '' });
@@ -35,7 +35,7 @@ function CadastroBairro() {
     try {
       const response = await axios.post('https://cima-production.up.railway.app/bairro/', inputData); // Substitua a URL pela rota correta em seu backend
       console.log('Dados enviados com sucesso:', response.data);
-      alert("Cadastro realizado com sucesso!");
+      toast.success("Cadastro realizado com sucesso!")
     } catch (error) {
       console.error('Erro ao enviar dados:', error);
     }

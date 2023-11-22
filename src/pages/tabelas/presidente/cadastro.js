@@ -2,6 +2,7 @@ import React, { useState, useEffect  } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import '../style/style-cadastro.css';
+import { toast } from 'react-toastify'
 
 function CadastroPresidente() {
   const [inputData, setInputData] = useState({ nome: '', usuario: '', senha:'', email: '', codbairro: ''});
@@ -57,7 +58,7 @@ function CadastroPresidente() {
     try {
       const response = await axios.post('https://cima-production.up.railway.app/presidente/', inputData); // Substitua a URL pela rota correta em seu backend
       console.log('Dados enviados com sucesso:', response.data);
-      alert("Cadastro realizado com sucesso!")
+      toast.success("Cadastro realizado com sucesso!")
     } catch (error) {
       console.error('Erro ao enviar dados:', error);
     }
@@ -71,14 +72,14 @@ function CadastroPresidente() {
   return (
     <div className="app">
     <Link className='link-voltar' to={'/presidente'}>Voltar</Link>
-    <h1 className='titulo'>Cadastro de presidente do bairro</h1>
+    <h1 className='titulo'>Cadastro de Presidente de Bairro</h1>
     <form className='form1' onSubmit={handleSubmit}>
       <div className='div-formulario'>
 
           <input type="text" className='nome-cidade' placeholder="Nome Completo" name="nome" value={inputData.nome} onChange={handleInputChange} />
           <input type="text" className='nome-cidade' placeholder="Usuário" name="usuario" value={inputData.usuario} onChange={handleInputChange} />
           <input type="password" className='nome-cidade' placeholder="Senha" name="senha" value={inputData.senha} onChange={handleInputChange} />
-          <input type="text" className='nome-cidade' placeholder="Email" name="email" value={inputData.email} onChange={handleInputChange} />
+          <input type="email" className='nome-cidade' placeholder="Email" name="email" value={inputData.email} onChange={handleInputChange} />
           
           <select
             className='select'

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify'
 
 function SolicitacaoHome() {
   const [bairros, setBairros] = useState([]) 
@@ -48,7 +49,7 @@ function SolicitacaoHome() {
         console.log('Item deletado com sucesso!', response.data);
         // Atualizando a lista de clientes filtrados
         setFilteredClientes(filteredClientes.filter(cliente => cliente.id !== id));
-        alert("Usuário recusado com sucesso!");
+        toast.warn("Usuário recusado com sucesso!");
       } catch (error) {
         console.error('Erro ao deletar o item:', error);
       }
@@ -85,7 +86,7 @@ function SolicitacaoHome() {
         console.log('Item aceito e deletado com sucesso!', responsePost.data, responseTemporario.data, responseDelete.data);
         // Atualizando a lista de clientes filtrados
         setFilteredClientes(filteredClientes.filter(item => item.id !== id));
-        alert("Usuário aceito com sucesso!");
+        toast.success("Usuário aceito com sucesso!");
       } catch (error) {
         console.error('Erro ao aceitar e deletar o item:', error);
       }

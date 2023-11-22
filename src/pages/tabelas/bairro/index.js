@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import '../style/style-tabelas.css';
+import { toast } from 'react-toastify'
 
 function BairroHome() {
   const [cidades, setCidades] = useState([]);
@@ -39,8 +40,10 @@ function BairroHome() {
       try {
         const response = await axios.delete(`https://cima-production.up.railway.app/bairro${id}`);
         console.log('Item deletado com sucesso!', response.data);
-        window.location.reload();
-        alert('Usuário deletado com sucesso!');
+        toast.warn("Bairro deletado com sucesso!")
+        setTimeout(() => {
+          window.location.reload();
+        }, 4000);
       } catch (error) {
         console.error('Erro ao deletar o item:', error);
       }
