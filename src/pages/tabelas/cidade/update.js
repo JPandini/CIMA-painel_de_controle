@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import '../style/style-update.css';
+import { toast } from 'react-toastify'
 
 function UpdateCidade() {
   const [cidades, setCidades] = useState([]);
@@ -41,7 +42,7 @@ function UpdateCidade() {
       });
 
       setCidades({ ...cidades, nome: response.data.nome });
-      alert("Atualização realizada com sucesso");
+      toast.success("Atualização realizada com sucesso");
       navigate("/cidade");
     } catch (error) {
       console.error("Erro ao atualizar os dados:", error);

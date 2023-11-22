@@ -36,6 +36,7 @@ body {
 .link-voltar{
     padding: 10px;
     margin-left: 10px;
+    margin-top: 10px;
     border-radius: 5px;
     border: none;
     cursor: pointer;
@@ -45,6 +46,8 @@ body {
     font-size: 18px;
     display: flex;
     width: 45px;
+    display: inline-block;
+
 }
 
 .select{
@@ -55,4 +58,10 @@ body {
     flex-direction: column;
     margin-bottom: 10px;
     width: 242px;
+}
+
+.titulo{
+    display: inline-block;
+    margin-left: 20px;
+    margin-top: 10px;
 }

@@ -71,13 +71,18 @@ function SolicitacaoHome() {
           numero_casa: cliente.numero_casa,
           rua: cliente.rua,
           complemento: cliente.complemento,
-          codbairro: cliente.codbairro
-        });
+          codbairro: cliente.codbairro});
 
-        // Deletando da tabela usuario_temp
+          const responseTemporario = await axios.post('https://cima-production.up.railway.app/usuario_temp',{
+            email: cliente.email
+          }
+          );
+
+
+
         const responseDelete = await axios.delete(`https://cima-production.up.railway.app/usuario_temp/${id}`);
 
-        console.log('Item aceito e deletado com sucesso!', responsePost.data, responseDelete.data);
+        console.log('Item aceito e deletado com sucesso!', responsePost.data, responseTemporario.data, responseDelete.data);
         // Atualizando a lista de clientes filtrados
         setFilteredClientes(filteredClientes.filter(item => item.id !== id));
         alert("Usuário aceito com sucesso!");

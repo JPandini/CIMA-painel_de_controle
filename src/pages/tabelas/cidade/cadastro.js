@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import '../style/style-cadastro.css';
+import { toast } from 'react-toastify'
 
 function CadastroCidade() {
   const [inputData, setInputData] = useState({ nome: '',});
@@ -17,7 +18,7 @@ function CadastroCidade() {
     try {
       const response = await axios.post('https://cima-production.up.railway.app/cidade/', inputData); 
       console.log('Dados enviados com sucesso:', response.data);
-      alert("Cadastro realizado com sucesso!")
+      toast.success("Cadastro realizado com sucesso!")
     } catch (error) {
       console.error('Erro ao enviar dados:', error);
     }
