@@ -42,9 +42,8 @@ function PresidenteHome() {
         const response = await axios.delete(`https://cima-production.up.railway.app/presidente/${id}`);
         console.log('Item deletado com sucesso!', response.data);
         toast.warn("Presidente deletado com sucesso!")
-        setTimeout(() => {
-          window.location.reload();
-        }, 4000);
+        setClientes((prevClientes) => prevClientes.filter((cliente) => cliente.id !== id));
+
       } catch (error) {
         console.error('Erro ao deletar o item:', error);
       }

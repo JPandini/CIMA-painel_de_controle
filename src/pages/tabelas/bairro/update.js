@@ -71,12 +71,20 @@ function UpdateBairro() {
 
   return (
     <div className="geral-tela-update">
-      <h1 className="titulo-update-screen">Update</h1>
+      <h1 className="titulo-update-screen">Atualizar Bairro</h1>
       <ul className="ul-get">
         {bairros.map((bairro) => (
           <li className="listagem" key={bairro.id}>{bairro.nome}</li>
         ))}
       </ul>
+
+      <input
+        className="input-update"
+        type="text"
+        placeholder="Novo Nome"
+        value={novoNome}
+        onChange={(e) => setNovoNome(e.target.value)}
+      />
 
       <select
         className='select'
@@ -92,13 +100,7 @@ function UpdateBairro() {
         ))}
       </select>
 
-      <input
-        className="input-update"
-        type="text"
-        placeholder="Novo Nome"
-        value={novoNome}
-        onChange={(e) => setNovoNome(e.target.value)}
-      />
+
 
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <button className="botao-update" onClick={handleUpdate}>Atualizar</button>

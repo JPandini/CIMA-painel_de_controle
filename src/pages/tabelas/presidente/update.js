@@ -89,10 +89,10 @@ function UpdatePresidente() {
 
   return (
     <div className="geral-tela-update">
-      <h1 className="titulo-update-screen">Update</h1>
+      <h1 className="titulo-update-screen">Atualizar Presidente</h1>
       <ul className="ul-get">
         {presidentes.map((presidente) => (
-          <li className="listagem" key={presidente.id}>{presidente.nome}</li>
+          <li className="listagem-presidente" key={presidente.id}>{presidente.nome}</li>
         ))}
       </ul>
 

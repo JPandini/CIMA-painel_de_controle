@@ -51,7 +51,7 @@ function UpdateCidade() {
 
   return (
     <div className="geral-tela-update">
-      <h1 className="titulo-update-screen">Update</h1>
+      <h1 className="titulo-update-screen">Atualizar Cidade</h1>
       <ul className="ul-get">
         {cidades.map((cidade) => (
           <li className="listagem" key={cidade.id}>{cidade.nome}</li>

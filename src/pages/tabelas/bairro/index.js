@@ -38,12 +38,11 @@ function BairroHome() {
   const handleDelete = async (id) => {
     if (!isNaN(id)) {
       try {
-        const response = await axios.delete(`https://cima-production.up.railway.app/bairro${id}`);
+        const response = await axios.delete(`https://cima-production.up.railway.app/bairro/${id}`);
         console.log('Item deletado com sucesso!', response.data);
         toast.warn("Bairro deletado com sucesso!")
-        setTimeout(() => {
-          window.location.reload();
-        }, 4000);
+        setClientes((prevClientes) => prevClientes.filter((cliente) => cliente.id !== id));
+
       } catch (error) {
         console.error('Erro ao deletar o item:', error);
       }
