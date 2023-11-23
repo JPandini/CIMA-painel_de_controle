@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import "./login.css";
 
@@ -104,9 +104,7 @@ function Login({ setIsAuthenticated }) {
           Acessar
         </button>
         {mensagem && <p className="mensagem-erro">{mensagem}</p>}
-        <Link to={"/cadastro"}>
-          <p>Não possui cadastro?</p>
-        </Link>
+
       </form>
     </div>
   );
