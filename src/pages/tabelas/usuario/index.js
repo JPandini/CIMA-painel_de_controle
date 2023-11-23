@@ -5,9 +5,11 @@ import '../style/style-tabelas.css';
 import { toast } from 'react-toastify'
 
 function UsuarioHome() {
+  const [bairros, setBairros] = useState([]) 
   const [clientes, setClientes] = useState([]);
   const [searchNome, setSearchNome] = useState('');
   const [filteredClientes, setFilteredClientes] = useState([]);
+  
 
   useEffect(() => {
     async function fetchData() {
@@ -17,7 +19,16 @@ function UsuarioHome() {
     }
 
     fetchData();
+
+    axios.get('https://cima-production.up.railway.app/bairro') 
+    .then((response) => {
+      setBairros(response.data); 
+    })
+    .catch((error) => {
+      console.error('Erro ao buscar cidades:', error);
+    });
   }, []);
+
 
   useEffect(() => {
     const filtered = clientes.filter(cliente =>
@@ -62,8 +73,15 @@ function UsuarioHome() {
       <ul className="client-list">
         {filteredClientes.map(cliente => (
           <article key={cliente.id} className="client-item">
-            <li className='nome'> {cliente.id} - {cliente.nome}</li>
-            <Link className='link-update' to={`/update/${cliente.id}`}>Update</Link>
+            <li className='nome'> {cliente.id} - {cliente.nome} ({cliente.usuario}) - {cliente.email} -{' '}
+            {bairros.map((bairro) => {
+              while (bairro.id === cliente.codbairro){
+                return <p className='paragrafo' key={cliente.codbairro}>{bairro.nome}</p>
+              }
+              return null;
+            })}
+            </li>
+            <Link className='link-update' to={`/updateusuario/${cliente.id}`}>Update</Link>
             <button className='link-delete' onClick={() => handleDelete(cliente.id)}>Deletar</button>
           </article>
         ))}

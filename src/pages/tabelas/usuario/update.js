@@ -4,20 +4,23 @@ import axios from "axios";
 import '../style/style-update.css';
 
 
-function UpdateCidade() {
+function UpdateUsuario() {
+  const [usuarios, setUsuario] = useState([]);
+  const [bairros, setBairros] = useState([]);
   const [cidades, setCidades] = useState([]);
-  const [novoNome, setNovoNome] = useState("");
+  const [inputData, setInputData] = useState({codbairro: '' });
+
   const { id } = useParams();
   const navigate = useNavigate();
 
 
   // Função para buscar os dados da cidade
   useEffect(() => {
-    async function loadCidade() {
+    async function loadUsuario() {
       try {
-        const response = await axios.get(`https://cima-production.up.railway.app/cidade/${id}`);
-        if (Array.isArray(response.data.data)) { // Verifique se a resposta contém um array
-          setCidades(response.data.data);
+        const response = await axios.get(`https://cima-production.up.railway.app/usuario/${id}`);
+        if (Array.isArray(response.data.data)) {
+          setUsuario(response.data.data);
           console.log("Dados da cidade:", response.data.data);
         } else {
           console.error("Resposta da API não contém um array:", response.data);
@@ -26,46 +29,81 @@ function UpdateCidade() {
         console.error("Erro ao buscar os dados:", error);
       }
     }
-    loadCidade();
+    
+    loadUsuario();
   }, [id]);
   
-  
+  useEffect(() => {
+    axios.get('https://cima-production.up.railway.app/bairro')
+      .then((response) => {
+        setBairros(response.data);
+      })
+      .catch((error) => {
+        console.error('Erro ao buscar cidades:', error);
+      });
 
-  // Função para atualizar o nome da cidade
+    axios.get('https://cima-production.up.railway.app/cidade')
+      .then((response) => {
+        setCidades(response.data);
+      })
+      .catch((error) => {
+        console.error('Erro ao buscar cidades:', error);
+      });
+  }, []);
+
   async function handleUpdate() {
     try {
-      const response = await axios.patch(`https://cima-production.up.railway.app/cidade/${id}`, {
-        nome: novoNome,
+      const response = await axios.patch(`https://cima-production.up.railway.app/usuario/${id}`, {
+        nome: inputData.nome,
+        codbairro: inputData.codbairro,
       });
-      setCidades({ ...cidades, nome: response.data.nome });
+      setUsuario({ ...usuarios, nome: response.data.nome });
       alert("Atualização realizada com sucesso");
-      navigate("/cidade");
+      navigate("/usuario");
 
     } catch (error) {
       console.error("Erro ao atualizar os dados:", error);
     }
   }
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setInputData((prevData) => ({ ...prevData, [name]: value }));
+  };
 
   return (
     <div className="geral-tela-update">
-      <h1 className="titulo-update-screen">Update</h1>
+      <h1 className="titulo-update-screen">Atualizar Usuario</h1>
       <ul className="ul-get">
-      {cidades.map((cidade) => (
-        <li className="listagem" key={cidade.id}>{cidade.nome}</li>
-      ))}
+        {usuarios.map((usuario) => (
+          <li className="listagem-presidente" key={usuario.id}>{usuario.nome}</li>
+        ))}
       </ul>
 
-      <input
-        className="input-update"
-        type="text"
-        placeholder="Novo Nome"
-        value={novoNome}
-        onChange={(e) => setNovoNome(e.target.value)}
-      />
+      <select
+        className='select'
+        name="codbairro"
+        value={inputData.codbairro}
+        onChange={handleInputChange}
+      >
+        <option value="">Selecione o bairro</option>
+        {bairros.map((bairro) => (
+          <option key={bairro.id} value={bairro.id}>
+            {bairro.nome} -
+            {cidades.map((cidade) => {
+              if (cidade.id === bairro.codcidade) {
+                  return <p className='paragrafo' key={bairro.codcidade}> {cidade.nome}</p>;
+              }
+              return null;
+          })}
+          </option>
+        ))}
+      </select>
 
+
+      
       <button className="botao-update" onClick={handleUpdate}>Atualizar</button>
     </div>
   );
 }
 
-export default UpdateCidade;
+export default UpdateUsuario;

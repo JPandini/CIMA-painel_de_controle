@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import '../style/style-tabelas.css';
 
 function SolicitacaoHome() {
   const [bairros, setBairros] = useState([]) 
@@ -112,6 +113,8 @@ function SolicitacaoHome() {
         <button onClick={() => setSearchNome('')} className="clear-button">Limpar</button>
       </div>
       
+      {filteredClientes.length === 0 && <span className='span-nenhuma'> Nenhuma solicitação enviada! </span>}
+
       <ul className="client-list">
         {filteredClientes.map(cliente => (
           <article key={cliente.id} className="client-item">
