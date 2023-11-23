@@ -25,12 +25,12 @@ ul {
   }
   
   .listagem::before {
-    content: ''; /* Remova o marcador padrão */
+    content: ''; 
     margin-right: 5px;
-    width: 20px; /* Ajuste o tamanho da imagem conforme necessário */
+    width: 20px; 
     height: 20px;
-    background-image: url('/src/images/location.png'); /* Caminho para a imagem */
-    background-size: cover; /* Ajuste conforme necessário */
+    background-image: url('/src/images/location.png'); 
+    background-size: cover; 
     display: inline-block;
   }
 
