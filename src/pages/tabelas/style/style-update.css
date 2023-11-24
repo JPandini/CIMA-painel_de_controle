@@ -10,6 +10,9 @@ body {
     align-items: center;
     flex-direction: column;
 }
+.titulo-update-screen{
+  display: inline-block;
+}
 
 ul {
     list-style: none;
@@ -73,3 +76,19 @@ ul {
     width: 220px; 
   }
 
+  .link-voltar{
+    padding: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: #5967b6; 
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    display: flex;
+    width: 45px;
+    display: inline-block;
+    align-self: flex-start;
+}

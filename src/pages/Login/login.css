@@ -1,32 +1,35 @@
 .geral {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 80vh;
-  }
-  
-  .titulo {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  .formulario {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
+  display: flex;
+  height: 80vh;
+}
 
-  .input-login{
-    padding: 10px;
+.titulo {
+  font-size: 24px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+
+.input-login{
+    padding: 8px;
     font-size: 18px;
     border-radius: 10px;
-    margin-bottom: 10px;
-  }
+    margin-bottom: 30px;
+}
 
 
-  .botao-acessar{
+.botao-acessar{
     padding: 10px;
     margin-left: 10px;
     border-radius: 5px;
@@ -36,9 +39,70 @@
     color: white;
     text-decoration: none;
     font-size: 18px;
+    margin-bottom: 10px;
 }
 
 .botao-acessar:hover {
-    background-color: #0056b3;
-  }
+  background-color: #0056b3;
+}
+
+.div-login {
+  margin-top: 5%;
+  margin-left: 10%;
+  flex: 1; 
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: #5967b6;
+  width: 30px; 
+  border-top-left-radius: 10px; 
+  border-bottom-left-radius: 10px; 
+  background-color: #353030;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+
+.div-logar {
+  border: solid 0px;
+  width: 50%;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;
+}
+
+
+.div-img {
+  margin-top: 5%;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  width: 30%;
+  background-color: #fff;
+  margin-right: 10%;
+  border-top-right-radius: 10px; 
+  border-bottom-right-radius: 10px;
   
+}
+
+.logo {
+  max-width: 100%; 
+  max-height: 100%; 
+  display: block; 
+  
+  
+}
+
+
+.icon {
+  margin-top:10px ;
+  font-size: 40px; 
+  color: #000; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

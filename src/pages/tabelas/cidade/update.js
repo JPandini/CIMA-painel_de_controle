@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link  } from "react-router-dom";
 import axios from "axios";
 import '../style/style-update.css';
 import { toast } from 'react-toastify'
@@ -51,6 +51,8 @@ function UpdateCidade() {
 
   return (
     <div className="geral-tela-update">
+    <Link className='link-voltar' to={'/cidade'}>Voltar</Link>
+
       <h1 className="titulo-update-screen">Atualizar Cidade</h1>
       <ul className="ul-get">
         {cidades.map((cidade) => (

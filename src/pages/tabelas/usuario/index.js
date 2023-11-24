@@ -65,6 +65,8 @@ function UsuarioHome() {
         />
         <button onClick={() => setSearchNome('')} className="clear-button">Limpar</button>
       </div>
+      {filteredClientes.length === 0 && <span className='span-nenhuma'> Nenhuma solicitação enviada! </span>}
+
       <ul className="client-list">
         {filteredClientes.map(cliente => {
           const isPresidente = idBairroPresidente !== null;

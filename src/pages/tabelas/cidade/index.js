@@ -62,6 +62,8 @@ function CidadeHome() {
         />
         <button onClick={() => setSearchNome('')} className="clear-button">Limpar</button>
       </div>
+      {filteredClientes.length === 0 && <span className='span-nenhuma'> Nenhuma solicitação enviada! </span>}
+
       <Link className='link-cadastro' to={"/cadastrocidade"}>Cadastrar</Link>
       <ul className="client-list">
         {filteredClientes.map(cliente => (

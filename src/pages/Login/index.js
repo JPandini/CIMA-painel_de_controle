@@ -2,6 +2,8 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import "./login.css";
+import logoImg from "../../images/Logo.png"
+import { FaRegUser } from "react-icons/fa";
 
 function Login({ setIsAuthenticated }) {
   const navigate = useNavigate();
@@ -82,6 +84,9 @@ function Login({ setIsAuthenticated }) {
 
   return (
     <div className="geral">
+      <div className='div-login'> 
+      <div className="div-logar">
+      <FaRegUser className="icon"/>
       <h2 className="titulo">Login Admin</h2>
       <form className="formulario" onSubmit={handleSubmit}>
         <input
@@ -104,9 +109,17 @@ function Login({ setIsAuthenticated }) {
           Acessar
         </button>
         {mensagem && <p className="mensagem-erro">{mensagem}</p>}
-
       </form>
-    </div>
+      </div>
+      </div>
+      <div className="div-img">
+      <img
+          src={logoImg} 
+          alt="Logo" 
+          className="logo" 
+        />
+      </div>
+      </div>
   );
 }
 

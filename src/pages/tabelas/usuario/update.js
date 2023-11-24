@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams,  useNavigate } from "react-router-dom";
+import { useParams,  useNavigate, Link  } from "react-router-dom";
 import axios from "axios";
 import '../style/style-update.css';
 
@@ -72,6 +72,8 @@ function UpdateUsuario() {
 
   return (
     <div className="geral-tela-update">
+      <Link className='link-voltar' to={'/usuario'}>Voltar</Link>
+
       <h1 className="titulo-update-screen">Atualizar Usuario</h1>
       <ul className="ul-get">
         {usuarios.map((usuario) => (
