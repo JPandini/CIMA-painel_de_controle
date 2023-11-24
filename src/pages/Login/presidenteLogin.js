@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import "./login.css";
 
-function Login({ setIsAuthenticated }) {
+function LoginPresidente({ setIsAuthenticated }) {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
@@ -19,7 +19,7 @@ function Login({ setIsAuthenticated }) {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('https://cima-production.up.railway.app/adminlogin', formData);
+      const response = await axios.post('https://cima-production.up.railway.app/presidentelogin', formData);
   
       if (response.status === 200) {
         setIsAuthenticated(true);
@@ -64,7 +64,7 @@ function Login({ setIsAuthenticated }) {
       console.log(response.data);
     } catch (error) {
       localStorage.removeItem('token');
-      navigate('/login');
+      navigate('/loginpresidente');
 
       console.error('Erro ao obter dados autenticados', error);
     }
@@ -82,7 +82,7 @@ function Login({ setIsAuthenticated }) {
 
   return (
     <div className="geral">
-      <h2 className="titulo">Login Admin</h2>
+      <h2 className="titulo">Login do presidente</h2>
       <form className="formulario" onSubmit={handleSubmit}>
         <input
           className="input-login"
@@ -110,4 +110,4 @@ function Login({ setIsAuthenticated }) {
   );
 }
 
-export default Login;
+export default LoginPresidente;

@@ -5,6 +5,7 @@ import Header from './components/Header'
 
 
 import Login from "./pages/Login";
+import LoginPresidente from './pages/Login/presidenteLogin';
 import CadastroAdmin from "./pages/Cadastro";
 import Home from "./pages/Home"
 import NotFound from "./pages/NotFound";
@@ -44,6 +45,7 @@ return(
  
 
         <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+        <Route path='/loginpresidente' element={<LoginPresidente setIsAuthenticated={setIsAuthenticated} />}/>
 
         <Route path="/" element={<PrivateRoute auth={{ isAuthenticated, setIsAuthenticated }}><Home /></PrivateRoute>} />      
         <Route path="/cadastro" element={<CadastroAdmin />} />
