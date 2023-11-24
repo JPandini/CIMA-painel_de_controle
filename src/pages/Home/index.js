@@ -9,12 +9,14 @@ import { IoIosLogOut } from "react-icons/io";
 import { TbUsersPlus } from "react-icons/tb";
 import axios from "axios";
 import { Chart } from "react-google-charts";
+import { usePresidente } from "../../context/PresidenteContext";
 
 import './home.css';
 
 function Home() {
   const navigate = useNavigate();
   const [dados, setDados] = useState({ usuariosCadastrados: 0, presidentesCadastrados: 0 });
+  const { idBairroPresidente } = usePresidente();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -80,7 +82,7 @@ function Home() {
         <h3 className="titulo-tabelas">TABELAS</h3>
         <ul className="lista-banco">
           <li className="lista-bairro"><Link to={"/bairro"} className="links"><FaLocationDot /> BAIRROS</Link></li>
-          <li className="lista-cidade"><Link to={"/cidade"} className="links"><MdLocationCity /> CIDADES</Link></li>
+          {!idBairroPresidente &&<li className="lista-cidade"><Link to={"/cidade"} className="links"><MdLocationCity /> CIDADES</Link></li>}
           <li className="lista-postagens"><Link to={"/postagem"} className="links"><AiTwotoneEdit /> POSTAGENS</Link></li>
           <li className="lista-presidente"><Link to={"/presidente"} className="links"><RiAdminLine /> PRESIDENTES</Link></li>
           <li className="lista-usuario"><Link to={"/usuario"} className="links"><FaRegUser /> USUARIOS</Link></li>

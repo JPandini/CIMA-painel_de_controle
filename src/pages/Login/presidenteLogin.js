@@ -3,7 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import "./login.css";
 
+import { usePresidente } from "../../context/PresidenteContext";
+
 function LoginPresidente({ setIsAuthenticated }) {
+    const { setIdPresidente } = usePresidente();
+    const { setIdBairroPresidente } = usePresidente ();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
@@ -21,13 +25,20 @@ function LoginPresidente({ setIsAuthenticated }) {
     try {
       const response = await axios.post('https://cima-production.up.railway.app/presidentelogin', formData);
   
+      console.log('Resposta do Login:', response); 
+  
       if (response.status === 200) {
         setIsAuthenticated(true);
         localStorage.setItem('token', response.data.token);
-  
+        setIdPresidente(response.data.id);
+        setIdBairroPresidente(response.data.codbairro);
+        console.log('ID do Presidente:', response.data.id);
+        console.log('ID do do bairro do presidente:', response.data.codbairro);
+
         setMensagem("Login bem-sucedido");
-        
+  
         navigate('/');
+        
       } else {
         console.log(response.data);
         setMensagem("Credenciais inválidas. Tente novamente.");
@@ -37,6 +48,7 @@ function LoginPresidente({ setIsAuthenticated }) {
       setMensagem("Credenciais inválidas. Tente novamente.");
     }
   };
+  
   
 
   const handleSubmit = async (e) => {

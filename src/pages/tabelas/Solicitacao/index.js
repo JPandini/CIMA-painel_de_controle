@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../style/style-tabelas.css';
+import { usePresidente } from '../../../context/PresidenteContext';
 
 function SolicitacaoHome() {
   const [bairros, setBairros] = useState([]) 
   const [clientes, setClientes] = useState([]);
   const [searchNome, setSearchNome] = useState('');
   const [filteredClientes, setFilteredClientes] = useState([]);
+  const { idBairroPresidente } = usePresidente(); 
 
   useEffect(() => {
     async function fetchData() {
@@ -35,12 +37,13 @@ function SolicitacaoHome() {
   }, []);
 
   useEffect(() => {
-    const filtered = clientes.filter(cliente =>
-      cliente.nome && cliente.nome.toLowerCase().includes(searchNome.toLowerCase())
-    );
+  const filtered = clientes.filter(cliente =>
+    cliente.nome && cliente.nome.toLowerCase().includes(searchNome.toLowerCase()) &&
+    (idBairroPresidente ? cliente.codbairro === idBairroPresidente : true)
+  );
     setFilteredClientes(filtered);
 
-  }, [searchNome, clientes]);
+  }, [searchNome,idBairroPresidente, clientes]);
 
   const handleDelete = async (id) => {
     if (!isNaN(id)) {

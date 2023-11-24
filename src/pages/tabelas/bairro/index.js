@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import '../style/style-tabelas.css';
-import { toast } from 'react-toastify'
+import { toast } from 'react-toastify';
+import { usePresidente } from '../../../context/PresidenteContext';
 
 function BairroHome() {
+  const { idBairroPresidente } = usePresidente();
   const [cidades, setCidades] = useState([]);
   const [clientes, setClientes] = useState([]);
   const [searchNome, setSearchNome] = useState('');
@@ -32,8 +34,15 @@ function BairroHome() {
     const filtered = clientes.filter((cliente) =>
       cliente.nome.toLowerCase().includes(searchNome.toLowerCase())
     );
-    setFilteredClientes(filtered);
-  }, [searchNome, clientes]);
+
+    // Se idBairroPresidente existir, filtre por idBairroPresidente
+    if (idBairroPresidente) {
+      setFilteredClientes(filtered.filter(cliente => cliente.id === idBairroPresidente));
+    } else {
+      setFilteredClientes(filtered);
+    }
+
+  }, [searchNome, clientes, idBairroPresidente]);
 
   const handleDelete = async (id) => {
     if (!isNaN(id)) {
@@ -66,7 +75,7 @@ function BairroHome() {
           Limpar
         </button>
       </div>
-      <Link className='link-cadastro' to="/cadastrobairro">Cadastrar</Link>
+      {!idBairroPresidente && <Link className='link-cadastro' to="/cadastrobairro">Cadastrar</Link>}
       <ul className="client-list">
         {filteredClientes.map((cliente) => (
           <article key={cliente.id} className="client-item">

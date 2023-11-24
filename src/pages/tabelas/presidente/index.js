@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import '../style/style-tabelas.css';
-import { toast } from 'react-toastify'
+import { toast } from 'react-toastify';
+import { usePresidente } from '../../../context/PresidenteContext';
 
 function PresidenteHome() {
-  const [bairros, setBairros] = useState([]) 
+  const { idBairroPresidente } = usePresidente(); 
+  const [bairros, setBairros] = useState([]); 
   const [clientes, setClientes] = useState([]);
   const [searchNome, setSearchNome] = useState('');
   const [filteredClientes, setFilteredClientes] = useState([]);
@@ -18,7 +20,7 @@ function PresidenteHome() {
     }
 
     fetchData();
-    
+
     axios.get('https://cima-production.up.railway.app/bairro') 
     .then((response) => {
       setBairros(response.data); 
@@ -32,9 +34,15 @@ function PresidenteHome() {
     const filtered = clientes.filter(cliente =>
       cliente.nome && cliente.nome.toLowerCase().includes(searchNome.toLowerCase())
     );
-    setFilteredClientes(filtered);
 
-  }, [searchNome, clientes]);
+    // Se idBairroPresidente existir, filtre por codbairro
+    if (idBairroPresidente) {
+      setFilteredClientes(filtered.filter(cliente => cliente.codbairro === idBairroPresidente));
+    } else {
+      setFilteredClientes(filtered);
+    }
+
+  }, [searchNome, clientes, idBairroPresidente]);
 
   const handleDelete = async (id) => {
     if (!isNaN(id)) {
@@ -52,8 +60,6 @@ function PresidenteHome() {
     }
   };
 
-
-
   return (
     <div className="client-list-container">
       <h1 className="main-heading">Lista de Clientes</h1>
@@ -67,7 +73,7 @@ function PresidenteHome() {
         />
         <button onClick={() => setSearchNome('')} className="clear-button">Limpar</button>
       </div>
-      <Link className='link-cadastro' to={"/cadastropresidente"}>Cadastrar</Link>
+      {!idBairroPresidente && <Link className='link-cadastro' to={"/cadastropresidente"}>Cadastrar</Link>}
       <ul className="client-list">
         {filteredClientes.map(cliente => (
           <article key={cliente.id} className="client-item">
