@@ -23,26 +23,38 @@ function Home() {
       try {
         const token = localStorage.getItem('token');
         console.log('Token:', token);
-          if (!token) {
+        if (!token) {
           // Se não houver token, redirecione para a página de login
           navigate('/login');
           return;
         }
-  
+
         // Verifica se o usuário está autenticado
         await axios.get('https://cima-production.up.railway.app/dados-autenticados', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-  
+
         // Se a verificação passar, então busca os dados do gráfico
-        const response = await axios.get('https://cima-production.up.railway.app/dadosGrafico', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-  
+        let response;
+        if (idBairroPresidente) {
+          // Se idBairroPresidente existir, busca o número de usuários do seu bairro
+          response = await axios.get(`https://cima-production.up.railway.app/dadosGrafico/${idBairroPresidente}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+        } else {
+          // Se idBairroPresidente não existir, assume que é um administrador e busca o número geral de usuários
+          response = await axios.get('https://cima-production.up.railway.app/dadosGrafico', {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+        }
+
+        console.log('Data fetched successfully:', response.data);
         setDados(response.data);
       } catch (error) {
         console.error('Erro ao obter dados para o gráfico:', error);
@@ -50,9 +62,9 @@ function Home() {
         navigate('/login');
       }
     };
-  
+
     fetchData();
-  }, [navigate]);
+  }, [navigate, idBairroPresidente]);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
