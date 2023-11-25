@@ -6,9 +6,9 @@ import Header from './components/Header'
 
 import Login from "./pages/Login";
 import LoginPresidente from './pages/Login/presidenteLogin';
-import CadastroAdmin from "./pages/Cadastro";
 import Home from "./pages/Home"
 import NotFound from "./pages/NotFound";
+import TelaInicial from './pages/TelaInicial/terminal';
 
 import SolicitacaoHome from "./pages/tabelas/Solicitacao";
 
@@ -48,7 +48,7 @@ return(
         <Route path='/loginpresidente' element={<LoginPresidente setIsAuthenticated={setIsAuthenticated} />}/>
 
         <Route path="/" element={<PrivateRoute auth={{ isAuthenticated, setIsAuthenticated }}><Home /></PrivateRoute>} />      
-        <Route path="/cadastro" element={<CadastroAdmin />} />
+        <Route path="/telainicial" element={<TelaInicial />} />
 
 {/*      <Route path='/' element={<Home/>} />*/}
 

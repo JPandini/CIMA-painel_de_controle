@@ -1,0 +1,157 @@
+    .conteiner { 
+        background-image: url(../../images/Logo.png);
+        background-size: cover;
+    }
+
+    .caixa-texto{
+    
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin: 0;
+    }
+    
+    .texto-bemvindo {
+    
+        
+        font-size: 35px;
+        color: #fff;
+        margin-bottom: 0;
+    
+    }
+    .texto-prosseguir {
+    
+        
+        font-size: 35px;
+        color: #fff;
+        padding-bottom: 90px;
+    
+    }
+    
+    
+    .botao-adm {
+        
+        display: flex;
+        margin-bottom: 20px;
+        padding: 10px;
+        font-size: 18px;
+        border-radius: 10px;
+        background-color: #5967b6;
+        color: #fff ;
+        width: 50%;
+        justify-content: center;
+        border-color: #5967b6;
+    }
+    
+    .botao-adm:hover {
+        
+        background-color: #646faec0;
+    }
+    
+    .botao-presidente {
+    
+        display: flex;
+        margin-bottom: 40px;
+        padding: 10px;
+        font-size: 18px;
+        border-radius: 10px;
+        background-color: #5967b6;
+        color: #fff ;
+        width: 50%;
+        justify-content: center;   
+        border-color: #5967b6;
+    }
+    
+    .botao-presidente:hover {
+        
+        background-color: #646faec0;
+    }
+    
+
+
+.fundo {
+    background: linear-gradient(135deg, #353030, #353030e5);
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50%;
+    width: 30%;
+    box-shadow: 2px 4px 10px;
+    border-radius: 10px;
+}
+
+.caixa-texto{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
+}
+
+.texto-bemvindo {
+
+    
+    font-size: 35px;
+    color: #fff;
+    margin-bottom: 0;
+
+}
+.texto-prosseguir {
+
+    
+    font-size: 35px;
+    color: #fff;
+    padding-bottom: 90px;
+
+}
+
+
+.botao-adm {
+    
+    display: flex;
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 10px;
+    background-color: #5967b6;
+    color: #fff ;
+    width: 50%;
+    justify-content: center;
+    border-color: #5967b6;
+}
+
+.botao-adm:hover {
+    
+    background-color: #646faec0;
+}
+
+.botao-presidente {
+
+    display: flex;
+    margin-bottom: 40px;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 10px;
+    background-color: #5967b6;
+    color: #fff ;
+    width: 50%;
+    justify-content: center;   
+    border-color: #5967b6;
+}
+
+.botao-presidente:hover {
+    
+    background-color: #646faec0;
+}
+
+
+
+
