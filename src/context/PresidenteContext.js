@@ -6,9 +6,11 @@ const PresidenteContext = createContext();
 export const PresidenteProvider = ({ children }) => {
   const [idPresidente, setIdPresidente] = useState(null);
   const [idBairroPresidente, setIdBairroPresidente] = useState(null);
+  const [codUsuarioPresidente, setCodUsuarioPresidente] = useState(null);
+  const [codBairroUsuarioPresidente, setCodBairroUsuarioPresidente] = useState(null); // Adicionado o codBairroUsuarioPresidente
 
   return (
-    <PresidenteContext.Provider value={{ idPresidente, setIdPresidente, idBairroPresidente, setIdBairroPresidente }}>
+    <PresidenteContext.Provider value={{ idPresidente, setIdPresidente, idBairroPresidente, setIdBairroPresidente, codUsuarioPresidente, setCodUsuarioPresidente, codBairroUsuarioPresidente, setCodBairroUsuarioPresidente }}>
       {children}
     </PresidenteContext.Provider>
   );

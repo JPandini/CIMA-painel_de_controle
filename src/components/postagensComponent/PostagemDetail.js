@@ -1,6 +1,5 @@
-// PostagemDetail.js
-
 import React from 'react';
+import '../../pages/tabelas/postagem/postagem.css'
 
 const PostagemDetail = ({ postagem, handleDelete }) => {
   const decodeBase64Image = (base64String) => {
@@ -8,11 +7,13 @@ const PostagemDetail = ({ postagem, handleDelete }) => {
   };
 
   return (
-    <article className="client-item">
-      <li className='nome'>{postagem.id} - {postagem.titulo}</li>
+    <div className='geral-postagem'>
+    <article className="client-item-postagem">
+      <li className='nome-postagem'>{postagem.titulo}</li>
       <img src={decodeBase64Image(postagem.imagem)} alt="Imagem da Postagem" />
-      <button className='link-delete' onClick={() => handleDelete(postagem.id)}>Deletar</button>
+      <button className='link-delete-postagem' onClick={() => handleDelete(postagem.id)}>Deletar</button>
     </article>
+    </div>
   );
 };
 

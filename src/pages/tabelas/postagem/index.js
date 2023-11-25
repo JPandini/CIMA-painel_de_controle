@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../style/style-tabelas.css';
+import './postagem.css'
 import PostagemDetail from '../../../components/postagensComponent/PostagemDetail';
 
 function PostagemHome() {
@@ -41,9 +41,9 @@ function PostagemHome() {
   };
 
   return (
-    <div className="client-list-container">
-      <h1 className="main-heading">Lista de Postagens</h1>
-      <div className="client-list-container">
+    <div className="client-list-container-postagem">
+      <h1 className="main-heading-postagem">Lista de Postagens</h1>
+      <div className="client-list-container_head-postagem">
         <input 
           type="text"
           placeholder="Pesquisar por título"
@@ -53,7 +53,8 @@ function PostagemHome() {
         />
         <button onClick={() => setSearchNome('')} className="clear-button">Limpar</button>
       </div>
-      <ul className="client-list">
+      
+      <ul className="client-list-postagem">
         {filteredPostagens.map(postagem => (
           <PostagemDetail key={postagem.id} postagem={postagem} handleDelete={handleDelete} />
         ))}
