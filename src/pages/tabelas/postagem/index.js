@@ -1,29 +1,43 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './postagem.css'
+import './postagem.css';
 import PostagemDetail from '../../../components/postagensComponent/PostagemDetail';
+import { usePresidente } from '../../../context/PresidenteContext';
 
 function PostagemHome() {
   const [postagens, setPostagens] = useState([]);
   const [searchNome, setSearchNome] = useState('');
   const [filteredPostagens, setFilteredPostagens] = useState([]);
+  const { idBairroPresidente } = usePresidente();
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get('https://cima-production.up.railway.app/postagem');
-      setPostagens(response.data);
-      setFilteredPostagens(response.data);
+      try {
+        let response;
+  
+        if (idBairroPresidente) {
+          // Se idBairroPresidente existir, busca postagens relacionadas ao bairro
+          response = await axios.get(`https://cima-production.up.railway.app/postagem/bairro/${idBairroPresidente}`);
+        } else {
+          // Se não, busca todas as postagens
+          response = await axios.get('https://cima-production.up.railway.app/postagem');
+        }
+  
+        setPostagens(response.data);
+        setFilteredPostagens(response.data);
+      } catch (error) {
+        console.error('Erro ao obter postagens:', error);
+      }
     }
-
-    fetchData(); 
-  }, []);
+  
+    fetchData();
+  }, [idBairroPresidente]); 
 
   useEffect(() => {
     const filtered = postagens.filter(postagem =>
       postagem.titulo && postagem.titulo.toLowerCase().includes(searchNome.toLowerCase())
     );
     setFilteredPostagens(filtered);
-
   }, [searchNome, postagens]);
 
   const handleDelete = async (id) => {
@@ -31,7 +45,7 @@ function PostagemHome() {
       try {
         const response = await axios.delete(`https://cima-production.up.railway.app/postagem/${id}`);
         console.log('Item deletado com sucesso!', response.data);
-        alert("Usuário deletado com sucesso!")
+        alert('Usuário deletado com sucesso!');
       } catch (error) {
         console.error('Erro ao deletar o item:', error);
       }
@@ -51,10 +65,10 @@ function PostagemHome() {
           onChange={(e) => setSearchNome(e.target.value)}
           className="search-input"
         />
-        <button onClick={() => setSearchNome('')} className="clear-button">Limpar</button>
+        <button onClick={() => setSearchNome('')} className="clear-button">
+          Limpar
+        </button>
       </div>
-      {filteredPostagens.length === 0 && <span className='span-nenhuma'>Nenhuma postagem cadastrada!</span>}
-
       
       <ul className="client-list-postagem">
         {filteredPostagens.map(postagem => (
