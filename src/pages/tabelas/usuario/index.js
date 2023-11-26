@@ -65,7 +65,7 @@ function UsuarioHome() {
         />
         <button onClick={() => setSearchNome('')} className="clear-button">Limpar</button>
       </div>
-      {filteredClientes.length === 0 && <span className='span-nenhuma'> Nenhuma solicitação enviada! </span>}
+      {filteredClientes.length === 0 && <span className='span-nenhuma'> Nenhum usuário cadastrado! </span>}
 
       <ul className="client-list">
         {filteredClientes.map(cliente => {

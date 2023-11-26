@@ -11,6 +11,7 @@ const PostagemDetail = ({ postagem, handleDelete }) => {
     <article className="client-item-postagem">
       <li className='nome-postagem'>{postagem.titulo}</li>
       <img src={decodeBase64Image(postagem.imagem)} alt="Imagem da Postagem" />
+      <li className='nome-postagem'>{postagem.descricao}</li>
       <button className='link-delete-postagem' onClick={() => handleDelete(postagem.id)}>Deletar</button>
     </article>
     </div>

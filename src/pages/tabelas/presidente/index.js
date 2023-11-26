@@ -73,7 +73,7 @@ function PresidenteHome() {
         />
         <button onClick={() => setSearchNome('')} className="clear-button">Limpar</button>
       </div>
-      {filteredClientes.length === 0 && <span className='span-nenhuma'> Nenhuma solicitação enviada! </span>}
+      {filteredClientes.length === 0 && <span className='span-nenhuma'>Nenhum presidente cadastrado!</span>}
 
       {!idBairroPresidente && <Link className='link-cadastro' to={"/cadastropresidente"}>Cadastrar</Link>}
       <ul className="client-list">

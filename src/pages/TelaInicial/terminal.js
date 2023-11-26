@@ -1,6 +1,6 @@
 import React from "react";
 import "./terminal.css";
-
+import { Link } from 'react-router-dom'
 
 function TelaInicial(){
 
@@ -13,13 +13,9 @@ return (
         <p className="texto-bemvindo"> Bem vindo! </p>
         <p className="texto-prosseguir"> Como deseja prosseguir? </p>
       </div>
-        <button className="botao-adm" type="submit">
-          Login Administrador
-        </button>
-        
-        <button className="botao-presidente" type="submit">
-          Login Presidente
-        </button>
+
+        <Link to={'/login'} className="botao-adm">Administrador</Link>
+        <Link to={'/loginpresidente'} className="botao-presidente">Presidente</Link>
 
     </div>
 

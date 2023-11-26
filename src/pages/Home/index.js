@@ -25,7 +25,7 @@ function Home() {
         console.log('Token:', token);
         if (!token) {
           // Se não houver token, redirecione para a página de login
-          navigate('/login');
+          navigate('/telainicio');
           return;
         }
 
@@ -58,8 +58,7 @@ function Home() {
         setDados(response.data);
       } catch (error) {
         console.error('Erro ao obter dados para o gráfico:', error);
-        // Em caso de erro, redirecione para a página de login
-        navigate('/login');
+        navigate('/telainicio');
       }
     };
 
@@ -68,7 +67,7 @@ function Home() {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    navigate('/login');
+    navigate('/telainicio');
   };
 
   const usuariosNaoNulos = Array.isArray(dados.usuariosCadastrados)
@@ -118,7 +117,7 @@ function Home() {
           />
         </div>
 
-        <button onClick={handleLogout} className="logout-button"><IoIosLogOut /> Logout</button>
+        <button onClick={handleLogout} className="logout-button"><IoIosLogOut />Logout</button>
       </div>
     </div>
   );

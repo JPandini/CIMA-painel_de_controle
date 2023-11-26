@@ -53,6 +53,8 @@ function PostagemHome() {
         />
         <button onClick={() => setSearchNome('')} className="clear-button">Limpar</button>
       </div>
+      {filteredPostagens.length === 0 && <span className='span-nenhuma'>Nenhuma postagem cadastrada!</span>}
+
       
       <ul className="client-list-postagem">
         {filteredPostagens.map(postagem => (

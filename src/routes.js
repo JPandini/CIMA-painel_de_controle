@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import PrivateRoute from './privateRoute';
 import Header from './components/Header'
 
-
 import Login from "./pages/Login";
 import LoginPresidente from './pages/Login/presidenteLogin';
 import Home from "./pages/Home"
@@ -18,44 +17,27 @@ import PostagemHome from "./pages/tabelas/postagem";
 import PresidenteHome from "./pages/tabelas/presidente";
 import UsuarioHome from "./pages/tabelas/usuario";
 
-
 import CadastroCidade from "./pages/tabelas/cidade/cadastro";
 import CadastroBairro from "./pages/tabelas/bairro/cadastro";
 import CadastroPresidente from "./pages/tabelas/presidente/cadastro";
-
 
 import UpdateCidade from "./pages/tabelas/cidade/update";
 import UpdateBairro from "./pages/tabelas/bairro/update";
 import UpdatePresidente from "./pages/tabelas/presidente/update";
 import UpdateUsuario from './pages/tabelas/usuario/update';
 
-
-
 function RouteApp(){
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    
-    /* const auth = { isAuthenticated: true }; */
-
 return(
 <Router>
 <Header/>
-
     <Routes>
         {/* <Route path='/login' element={<Login/>}/> */}
- 
-
         <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
         <Route path='/loginpresidente' element={<LoginPresidente setIsAuthenticated={setIsAuthenticated} />}/>
-
         <Route path="/" element={<PrivateRoute auth={{ isAuthenticated, setIsAuthenticated }}><Home /></PrivateRoute>} />      
-        <Route path="/telainicial" element={<TelaInicial />} />
-
-{/*      <Route path='/' element={<Home/>} />*/}
-
-
-       
-
-
+        <Route path="/telainicio" element={<TelaInicial />} />
+        {/*<Route path='/' element={<Home/>} />*/}
         <Route path="/solicitacao" element={ <SolicitacaoHome/> }/>
            
         <Route path="/cidade" element={ <CidadeHome/> }/>
@@ -74,7 +56,6 @@ return(
         <Route path="/updateusuario/:id" element={<UpdateUsuario/>}/>
 
         <Route path="*" element={ <NotFound /> }/>
-
     </Routes>
 </Router>
     )

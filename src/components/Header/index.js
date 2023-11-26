@@ -5,7 +5,6 @@ function Header(){
     return(
     <header>
         <Link className='botao' to="/">Painel de controle</Link>
-        
     </header>
     )
 }

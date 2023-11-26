@@ -126,6 +126,7 @@
     width: 50%;
     justify-content: center;
     border-color: #5967b6;
+    text-decoration: none;
 }
 
 .botao-adm:hover {
@@ -145,6 +146,8 @@
     width: 50%;
     justify-content: center;   
     border-color: #5967b6;
+    text-decoration: none;
+
 }
 
 .botao-presidente:hover {

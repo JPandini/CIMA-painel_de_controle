@@ -75,7 +75,7 @@ function BairroHome() {
           Limpar
         </button>
       </div>
-      {filteredClientes.length === 0 && <span className='span-nenhuma'> Nenhuma solicitação enviada! </span>}
+      {filteredClientes.length === 0 && <span className='span-nenhuma'> Nenhum bairro cadastrado! </span>}
 
       {!idBairroPresidente && <Link className='link-cadastro' to="/cadastrobairro">Cadastrar</Link>}
       <ul className="client-list">

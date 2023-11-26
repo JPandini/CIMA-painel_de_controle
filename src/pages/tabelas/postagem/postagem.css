@@ -58,19 +58,26 @@ body {
 
 .link-delete-postagem {
   padding: 10px;
-  margin-left: 10px;
   border-radius: 5px;
   border: none;
   cursor: pointer;
   color: rgb(252, 249, 249);
   font-size: 15px;
   background-color: #f44336;
-  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .geral-postagem {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.span-nenhuma{
+  font-size: 18px;
+  display: flex;
   justify-content: center;
   align-items: center;
 }

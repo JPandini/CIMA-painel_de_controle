@@ -6,7 +6,7 @@ const PrivateRoute = ({ auth, children }) => {
   return auth.isAuthenticated && isLogged() ? (
     children
   ) : (
-    <Navigate to="/login" replace={true} />
+    <Navigate to="/telainicio" replace={true} />
   );
 };
 
