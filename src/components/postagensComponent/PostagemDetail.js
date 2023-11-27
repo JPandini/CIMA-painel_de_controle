@@ -13,7 +13,6 @@ const PostagemDetail = ({ postagem, handleDelete }) => {
       <img className= 'imagem_usuario-postagem'src={decodeBase64Image(postagem.imagem_usuario)} alt="Imagem da Postagem" />
       <li className='nome_usuario-postagem'>{postagem.nome_usuario}</li>
       </div>
-      <li>{postagem.data}</li>
       <li className='nome-postagem'>{postagem.titulo}</li>
       <img src={decodeBase64Image(postagem.imagem)} alt="Imagem da Postagem" />
       <li className='nome-postagem'>{postagem.descricao}</li>
