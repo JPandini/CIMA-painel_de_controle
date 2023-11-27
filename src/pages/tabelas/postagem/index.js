@@ -3,6 +3,8 @@ import axios from 'axios';
 import './postagem.css';
 import PostagemDetail from '../../../components/postagensComponent/PostagemDetail';
 import { usePresidente } from '../../../context/PresidenteContext';
+import { toast } from 'react-toastify';
+
 
 function PostagemHome() {
   const [postagens, setPostagens] = useState([]);
@@ -45,7 +47,9 @@ function PostagemHome() {
       try {
         const response = await axios.delete(`https://cima-production.up.railway.app/postagem/${id}`);
         console.log('Item deletado com sucesso!', response.data);
-        alert('Usuário deletado com sucesso!');
+        toast.warn('Usuário deletado com sucesso!');
+        setPostagens((prevClientes) => prevClientes.filter((cliente) => cliente.id !== id));
+
       } catch (error) {
         console.error('Erro ao deletar o item:', error);
       }

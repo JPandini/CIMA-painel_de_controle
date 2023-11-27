@@ -61,7 +61,8 @@ body {
 }
 
 .titulo{
-    display: inline-block;
-    margin-left: 20px;
+    display: flex;
     margin-top: 10px;
+    align-items: center;
+    justify-content: center;
 }

@@ -71,7 +71,7 @@ function UpdateBairro() {
 
   return (
     <div className="geral-tela-update">
-      <Link className='link-voltar' to={'/usuario'}>Voltar</Link>
+      <Link className='link-voltar' to={'/bairro'}>Voltar</Link>
       <h1 className="titulo-update-screen">Atualizar Bairro</h1>
       <ul className="ul-get">
         {bairros.map((bairro) => (
